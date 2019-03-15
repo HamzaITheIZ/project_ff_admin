@@ -8,16 +8,23 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <title>Login</title>
     </head>
-    <body>
+    <body style="background-image: url('work-back.jpg');background-repeat: no-repeat;background-size: 100%;" >
+        <!--
+        <div class="container" style="background-color: red;background-image: url('work-back.jpg');background-repeat: no-repeat;background-size: cover;">
+            <div class="row">
+                <div class="col-lg-12"></div>
+            </div>
+        </div>
+        -->
         <div>
             <br>
             <br>
 
         </div>
 
-        <div class="card mx-auto border-0" style="width: 25rem;background-color: #f7f7f7;">
+        <div class="card mx-auto border-0" style="width: 25rem;background-color: #f7f7f7;opacity: 0.8">
             <img class="card-img-top mx-auto" style="width:60%;margin-top:5%; " src="./icons/login3.png" alt="Login Icon">
-            <div class="card-body">
+            <div class="card-body" >
                 <form id="form_login" onsubmit="return false">
                     <!--<div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
