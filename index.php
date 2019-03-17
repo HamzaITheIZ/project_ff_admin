@@ -24,7 +24,7 @@
 
         <div class="card mx-auto border-0" style="width: 25rem;background-color: #f7f7f7;opacity: 0.8">
             <img class="card-img-top mx-auto" style="width:60%;margin-top:5%; " src="./icons/login3.png" alt="Login Icon">
-            <div class="card-body" >
+            <div class="card-body"  >
                 <form id="form_login" onsubmit="return false">
                     <!--<div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>

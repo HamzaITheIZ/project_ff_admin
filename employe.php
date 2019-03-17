@@ -2,13 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+        <!--<link rel="icon" type="image/png" href="assets/img/favicon.ico">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>Light Bootstrap Dashboard by Creative Tim</title>
+        <title>EMPLOYE</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
+
+
 
 
         <!-- Bootstrap core CSS     -->
@@ -26,74 +28,69 @@
 
 
         <!--     Fonts and icons     -->
+        <!--
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+        -->
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        
     </head>
     <body>
 
         <div class="wrapper">
-            <div class="sidebar" data-color="black" data-image="assets/img/sidebar-5.jpg">
+            <div class="sidebar" data-color="black" data-image="assets/img/side1.jpg">
 
                 <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
                 <div class="sidebar-wrapper">
                     <div class="logo">
-                        <a href="http://www.creative-tim.com" class="simple-text">
-                            Creative Tim
+                        <a href="index.php" class="simple-text">
+                            HY's Neteat
                         </a>
                     </div>
 
                     <ul class="nav">
                         <li>
                             <a href="dashboard.html">
-                                <i class="pe-7s-graph"></i>
-                                <p>Dashboard</p>
+                                <i class="pe-7s-graph3"></i>
+                                <p>Statistique</p>
                             </a>
                         </li>
                         <li class="active">
-                            <a href="user.html">
-                                <i class="pe-7s-user"></i>
-                                <p>User Profile</p>
+                            <a href="employe.php">
+                                <!--<i class="pe-7s-user"></i>        -->                        
+                                <i class="pe-7s-users"></i>
+
+                                <p>LES EMPLOYES</p>
                             </a>
                         </li>
                         <li>
-                            <a href="table.html">
-                                <i class="pe-7s-note2"></i>
-                                <p>Table List</p>
+                            <a href="client.php">
+                                <i class="pe-7s-users"></i>
+                                <p>Les Clients</p>
                             </a>
                         </li>
                         <li>
-                            <a href="typography.html">
-                                <i class="pe-7s-news-paper"></i>
-                                <p>Typography</p>
+                            <a href="plat.php">
+                                <i class="pe-7s-users"></i>
+                                <p>Les plats</p>
                             </a>
                         </li>
                         <li>
-                            <a href="icons.html">
-                                <i class="pe-7s-science"></i>
-                                <p>Icons</p>
+                            <a href="vehicule.php">
+                                <i class="pe-7s-users"></i>
+                                <p>Les Vehicules</p>
                             </a>
                         </li>
+                  
                         <li>
-                            <a href="maps.html">
-                                <i class="pe-7s-map-marker"></i>
-                                <p>Maps</p>
+                            <a href="commandes.php">
+                                <i class="pe-7s-users"></i>
+                                <p>commandes</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="notifications.html">
-                                <i class="pe-7s-bell"></i>
-                                <p>Notifications</p>
-                            </a>
-                        </li>
-                        <li class="active-pro">
-                            <a href="upgrade.html">
-                                <i class="pe-7s-rocket"></i>
-                                <p>Upgrade to PRO</p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -101,42 +98,9 @@
             <div class="main-panel" >
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">Profile</a>
-                        </div>
+                       
                         <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav navbar-left">
-                                <li>
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-dashboard"></i>
-                                    </a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-globe"></i>
-                                        <b class="caret"></b>
-                                        <span class="notification">5</span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Notification 1</a></li>
-                                        <li><a href="#">Notification 2</a></li>
-                                        <li><a href="#">Notification 3</a></li>
-                                        <li><a href="#">Notification 4</a></li>
-                                        <li><a href="#">Another notification</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                </li>
-                            </ul>
+                   
 
                             <ul class="nav navbar-nav navbar-right">
 
@@ -154,24 +118,29 @@
                 <div class="content" >
                     <div class="container-fluid" >
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-11">
                                 <div class="card">
                                     <div class="content">
-                                        <form>
+                                        <form >
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Prenom d'employé : </label>
-                                                        <input type="txt" class="form-control">
+                                                        <input type="text" class="form-control" required="">
+
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
-
-                                                </div>
+                                                
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Nom d'employé : </label>
-                                                        <input type="txt" class="form-control">
+                                                        <input type="text" class="form-control" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>CIN : </label>
+                                                        <input type="text" class="form-control" required=""/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -179,23 +148,31 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email : </label>
-                                                        <input type="email" class="form-control">
+                                                        <input type="email" class="form-control" required="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Adresse : </label>
-                                                    <input type="txt" class="form-control">
+                                                    <input type="text" class="form-control" required="">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Telephone : </label>
-                                                        <input class="form-control">
+                                                        <input type="text" class="form-control" required="">
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6"></div>                         
+                                                <div class="col-lg-6 text-right" >
+                                                    <button type="submit" class="btn btn-primary ">Ajouter Employe</button>
+                                                </div>
+
+
                                             </div>
                                         </form>
 
@@ -203,38 +180,85 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <div class="form-group">
+                                    <span class="form-control">Liste Des Employés</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class=" table table-responsive-md">
+                                        <table class="table table-hover thead-dark" border="0">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Nom</th>                                            
+                                                    <th>Cin</th>
+                                                    <th>Email</th>
+                                                    <th>Adresse</th>
+                                                    <th>Tele</th>
+                                                    <th>Mot de passe</th>
+                                                    <th colspan="2" class="text-center">Operations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Uzumaki Naruto</td>                                            
+                                                    <td>KO111111</td>
+                                                    <td>NU@anim.com</td>
+                                                    <td>Konoha, The hidden leaf village</td>
+                                                    <td>9999999999</td>
+                                                    <td>dattebayo</td>
+                                                    <td colspan="2" class="text-center">
+                                                        <button type="button" class="btn btn-primary ">Modifier</button>
+                                                        <button type="button" class="btn btn-danger">supprimer</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-
-
-
             </div>
+
+
+
+
         </div>
+    </div>
 
 
-    </body>
+</body>
 
-    <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-    <!--  Checkbox, Radio & Switch Plugins -->
-    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
 
-    <!--  Charts Plugin -->
-    <script src="assets/js/chartist.min.js"></script>
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
 
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-    <script src="assets/js/light-bootstrap-dashboard.js"></script>
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script src="assets/js/light-bootstrap-dashboard.js"></script>
 
-    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-    <script src="assets/js/demo.js"></script>
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
 
 </html>
