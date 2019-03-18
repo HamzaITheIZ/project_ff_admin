@@ -5,7 +5,7 @@
         <!--<link rel="icon" type="image/png" href="assets/img/favicon.ico">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>EMPLOYE</title>
+        <title>EMPLOYES</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
@@ -31,7 +31,9 @@
         <!--
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+        
         -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
         
     </head>
@@ -46,47 +48,48 @@
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="index.php" class="simple-text">
-                            HY's Neteat
+                            <span style="color:#fac564;"><i class="fas fa-pizza-slice"></i>
+                             HY's</span> 
+                            Neteat
                         </a>
                     </div>
 
                     <ul class="nav">
                         <li>
-                            <a href="dashboard.html">
-                                <i class="pe-7s-graph3"></i>
+                            <a href="dashboard.php">
+                                <i class="far fa-chart-bar"></i>
                                 <p>Statistique</p>
                             </a>
                         </li>
                         <li class="active">
                             <a href="employe.php">
                                 <!--<i class="pe-7s-user"></i>        -->                        
-                                <i class="pe-7s-users"></i>
-
+                                <i class="fas fa-user-tie"></i>
                                 <p>LES EMPLOYES</p>
                             </a>
                         </li>
                         <li>
                             <a href="client.php">
-                                <i class="pe-7s-users"></i>
+                                <i class="fas fa-users"></i>
                                 <p>Les Clients</p>
                             </a>
                         </li>
                         <li>
                             <a href="plat.php">
-                                <i class="pe-7s-users"></i>
+                                <i class="fas fa-hamburger"></i>
                                 <p>Les plats</p>
                             </a>
                         </li>
                         <li>
                             <a href="vehicule.php">
-                                <i class="pe-7s-users"></i>
+                                <i class="fas fa-shuttle-van"></i>
                                 <p>Les Vehicules</p>
                             </a>
                         </li>
                   
                         <li>
-                            <a href="commandes.php">
-                                <i class="pe-7s-users"></i>
+                            <a href="commande.php">
+                                <i class="far fa-newspaper"></i>
                                 <p>commandes</p>
                             </a>
                         </li>
