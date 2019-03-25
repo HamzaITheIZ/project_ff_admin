@@ -142,7 +142,6 @@
                                                             <th>Quantite</th>
                                                             <th>Date de Commande</th>
                                                             <th>Nom de Livreur</th>
-                                                            <th>Vehicule Utiliser</th>
                                                             <th>Etat de Livraison</th>
                                                             <th colspan="2" class="text-center">Operations</th>
                                                         </tr>
@@ -155,10 +154,9 @@
                                                             <td>12</td>
                                                             <td>02/05/2019</td>
                                                             <td>Meryem</td>
-                                                            <td>Moto 1</td>
                                                             <td class="text-center"> 
-                                                                <div class="alert alert-warning" role="alert">
-                                                                    Sous Livraison
+                                                                <div >
+                                                                    <span class="alert alert-warning" role="alert">Sous Livraison</span>
                                                                 </div>
                                                             </td>
                                                             <td colspan="2" class="text-center">
@@ -173,10 +171,9 @@
                                                             <td>15</td>
                                                             <td>12/05/2019</td>
                                                             <td>chihad</td>
-                                                            <td>Moto 2</td>
                                                             <td  class="text-center"> 
-                                                                <div class="alert alert-success" role="alert">
-                                                                    Livrer
+                                                                <div >
+                                                                    <span class="alert alert-success" role="alert">Livrer</span>
                                                                 </div>
                                                             </td>
                                                             <td colspan="2" class="text-center">

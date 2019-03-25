@@ -234,7 +234,7 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <img class="img-circle" src="icons/user.png" width="50" height="50">
+                                                        <img class="img-circle" src="burger.jpg" width="50" height="50">
                                                     </td>                                            
                                                     <td>Login Image</td>
                                                     <td>1500</td>
