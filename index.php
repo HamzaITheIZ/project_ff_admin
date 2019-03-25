@@ -1,14 +1,24 @@
+<?php
+include_once("./database/constants.php");
+if (isset($_SESSION["userid"])) {
+    header("location:" . DOMAIN . "/dashboard.php");
+}
+?>
 <!DOCTYPE html>
-
 <html>
     <head>
         <link rel="stylesheet" href="assets/css/fontawsomeforinputs.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link type="text/css" href="./css/loader.css" rel="stylesheet">
+        <script type="text/javascript" src="./js/main.js"></script>
         <title>Login</title>
     </head>
-    <body style="background-image: url('assets/img/neteat.jpg');background-repeat: no-repeat;background-size: 100%;" >
+    <body style="background-image: url('assets/img/neteat.jpg');background-repeat: no-repeat;background-size: cover;" >
+        <div class="overlay"><div class="loader"></div></div>
         <!--
         <div class="container" style="background-color: red;background-image: url('work-back.jpg');background-repeat: no-repeat;background-size: cover;">
             <div class="row">
@@ -38,13 +48,15 @@
                     </div>
                     -->
                     <div class="inputWithIcon inputIconBg">
-                        <input type="text" placeholder="Entrer Votre Email">
+                        <input type="text" placeholder="Entrer Votre Email" id="log_email" name="log_email">
                         <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+                        <small id="e_error" class="form-text text-muted"></small>
                     </div>
-                    
+
                     <div class="inputWithIcon inputIconBg">
-                        <input type="text" placeholder="Entre Le Mot de Passe">
+                        <input type="text" placeholder="Entre Le Mot de Passe" id="log_password" name="log_password">
                         <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
+                        <small id="p_error" class="form-text text-muted"></small>
                     </div>
                     <div class="row">
 
@@ -57,9 +69,9 @@
                     </div>
 
                     <div class="row">
-                    <div class="col-md-3"></div> 
-                    <button type="submit" class="btn btn-primary col-md-6">Connexion</button>
-                    <div class="col-md-3"></div>
+                        <div class="col-md-3"></div> 
+                        <button type="submit" class="btn btn-primary col-md-6">Connexion</button>
+                        <div class="col-md-3"></div>
                     </div>
                 </form>
             </div>

@@ -1,3 +1,11 @@
+<?php
+include_once("./database/constants.php");
+
+if (!isset($_SESSION["userid"])) {
+    header("location:" . DOMAIN . "/index.php");
+}
+
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,6 +20,9 @@
 
 
 
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
         <!-- Bootstrap core CSS     -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,7 +46,10 @@
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-        
+        <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/manage.js"></script>
+
+
     </head>
     <body>
 
@@ -49,7 +63,7 @@
                     <div class="logo">
                         <a href="index.php" class="simple-text">
                             <span style="color:#fac564;"><i class="fas fa-pizza-slice"></i>
-                             HY's</span> 
+                                HY's</span> 
                             Neteat
                         </a>
                     </div>
@@ -86,14 +100,14 @@
                                 <p>Les Vehicules</p>
                             </a>
                         </li>
-                  
+
                         <li>
                             <a href="commande.php">
                                 <i class="far fa-newspaper"></i>
                                 <p>commandes</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -101,9 +115,9 @@
             <div class="main-panel" >
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
-                       
+
                         <div class="collapse navbar-collapse">
-                   
+
 
                             <ul class="nav navbar-nav navbar-right">
 
@@ -116,34 +130,34 @@
                         </div>
                     </div>
                 </nav>
-
-
                 <div class="content" >
                     <div class="container-fluid" >
                         <div class="row">
                             <div class="col-md-11">
                                 <div class="card">
                                     <div class="content">
-                                        <form >
+                                        <form id="employe_form" onsubmit="return false" autocomplete="off">
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Prenom d'employé : </label>
-                                                        <input type="text" class="form-control" required="">
-
+                                                        <input type="text" class="form-control" id="employe_prenom" name="employe_prenom">
+                                                        <small id="p_error" class="form-text text-muted"></small>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Nom d'employé : </label>
-                                                        <input type="text" class="form-control" required="">
+                                                        <input type="text" class="form-control" id="employe_nom" name="employe_nom">
+                                                        <small id="n_error" class="form-text text-muted"></small>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>CIN : </label>
-                                                        <input type="text" class="form-control" required=""/>
+                                                        <input type="text" class="form-control" id="employe_cin" name="employe_cin"/>
+                                                        <small id="cin_error" class="form-text text-muted"></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -151,21 +165,40 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email : </label>
-                                                        <input type="email" class="form-control" required="">
+                                                        <input type="email" class="form-control" id="employe_email" name="employe_email">
+                                                        <small id="e_error" class="form-text text-muted"></small>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Mot de Passe : </label>
+                                                        <input type="password" class="form-control" id="employe_password" name="employe_password">
+                                                        <small id="pass1_error" class="form-text text-muted"></small>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Rentrer Le Mot de Passe : </label>
+                                                        <input type="password" class="form-control" id="employe_pass2">
+                                                        <small id="pass2_error" class="form-text text-muted"></small>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label>Adresse : </label>
-                                                    <input type="text" class="form-control" required="">
+                                                    <input type="text" class="form-control" id="employe_adresse" name="employe_adresse">
+                                                    <small id="a_error" class="form-text text-muted"></small>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Telephone : </label>
-                                                        <input type="text" class="form-control" required="">
+                                                        <input type="text" class="form-control" id="employe_tele" name="employe_tele">
+                                                        <small id="t_error" class="form-text text-muted"></small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -174,8 +207,6 @@
                                                 <div class="col-lg-6 text-right" >
                                                     <button type="submit" class="btn btn-primary ">Ajouter Employe</button>
                                                 </div>
-
-
                                             </div>
                                         </form>
 
@@ -205,12 +236,11 @@
                                                     <th>Email</th>
                                                     <th>Adresse</th>
                                                     <th>Tele</th>
-                                                    <th>Mot de passe</th>
-                                                    <th colspan="2" class="text-center">Operations</th>
+                                                    <th class="text-center">Operations</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
+                                            <tbody id="get_employe">
+                                                <!--<tr>
                                                     <td>Uzumaki Naruto</td>                                            
                                                     <td>KO111111</td>
                                                     <td>NU@anim.com</td>
@@ -221,7 +251,7 @@
                                                         <button type="button" class="btn btn-primary ">Modifier</button>
                                                         <button type="button" class="btn btn-danger">supprimer</button>
                                                     </td>
-                                                </tr>
+                                                </tr>-->
                                             </tbody>
                                         </table>
                                     </div>
@@ -239,6 +269,10 @@
         </div>
     </div>
 
+    <?php
+    //Profil Form
+    include_once("./modals/update_employe.php");
+    ?>
 
 </body>
 

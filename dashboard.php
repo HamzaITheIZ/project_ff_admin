@@ -1,3 +1,12 @@
+<?php
+include_once("./database/constants.php");
+
+if (!isset($_SESSION["userid"])) {
+    header("location:" . DOMAIN . "/index.php");
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -108,7 +117,7 @@
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="logout.php">
                                         Log out
                                     </a>
                                 </li>
