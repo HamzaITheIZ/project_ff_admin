@@ -11,7 +11,8 @@
         <meta name="viewport" content="width=device-width" />
 
 
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
         <!-- Bootstrap core CSS     -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,7 +36,10 @@
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-        
+        <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/manage.js"></script>
+        <link rel="stylesheet" href="./css/titles.css">
+
     </head>
     <body>
 
@@ -49,7 +53,7 @@
                     <div class="logo">
                         <a href="index.php" class="simple-text">
                             <span style="color:#fac564;"><i class="fas fa-pizza-slice"></i>
-                             HY's</span> 
+                                HY's</span> 
                             Neteat
                         </a>
                     </div>
@@ -86,14 +90,14 @@
                                 <p>Les Vehicules</p>
                             </a>
                         </li>
-                  
+
                         <li>
                             <a href="commande.php">
                                 <i class="far fa-newspaper"></i>
                                 <p>commandes</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -101,9 +105,9 @@
             <div class="main-panel" >
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
-                       
+
                         <div class="collapse navbar-collapse">
-                   
+
 
                             <ul class="nav navbar-nav navbar-right">
 
@@ -120,145 +124,91 @@
                 <div class="content" >
                     <div class="container-fluid" >
                         <div class="row">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="content">
-                                        <form >
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label>Nom de Plat : </label>
-                                                        <input type="text" class="form-control" required="" rows="4">
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <label>Prix de Plat : </label>
-                                                        <input type="text" class="form-control" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Description de Plat : </label>
-                                                        <textarea class="form-control" required="">
-                                                            
-                                                        </textarea>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Photo de Plat : </label>
-
-                                                        <div id="yourBtn" onclick="getFile()">Cliquer pour choisir un fichier</div>
-                                                        <div style='height: 0px;width: 0px; overflow:hidden;'><input id="upfile" type="file" value="upload" onchange="sub(this)"/></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6"></div>                         
-                                                <div class="col-lg-6 text-right" >
-                                                    <button type="submit" class="btn btn-primary ">Ajouter Employe</button>
-                                                </div>
-
-
-                                            </div>
-                                        </form>
-
-                                    </div>
+                            <div class="col-lg-12">
+                                <div class="row text-center">
+                                    <h1 class="titles">Gestion de Vehicule</h1><br>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row text-center">                     
+                                    <button href="#" data-toggle="modal" data-target="#ajouter_vehicule" class="btn btn-primary " style="width: 200px;height: 50px; text-align: center;">Ajouter Vehicule</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <br>
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-sm-2"></div>
                             <div class="col-sm-8 text-center">
                                 <div class="form-group">
                                     <span class="form-control">Liste Des Employés</span>
                                 </div>
                             </div>
+                            <div class="col-sm-2"></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
                                 <div class="card">
                                     <div class=" table table-responsive-md">
                                         <table class="table table-hover thead-dark" border="0">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <th>Photo</th>                                            
-                                                    <th>Nom de Plat</th>
-                                                    <th>Prix</th>
-                                                    
+                                                    <th class="text-center">Numero de Vehicule</th>                                            
+                                                    <th class="text-center">Etat de Vehicule</th>
                                                     <th class="text-center">Operations</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img class="img-circle" src="icons/user.png" width="50" height="50">
-                                                    </td>                                            
-                                                    <td>Login Image</td>
-                                                    <td>1500</td>
-                                                    
-                                                    <td class="text-center">
-                                                        <button type="button" class="btn btn-primary ">Modifier</button>
-                                                        <button type="button" class="btn btn-danger">supprimer</button>
-                                                    </td>
-                                                </tr>
+                                            <tbody id="get_vehicule">
+
                                             </tbody>
                                         </table>
                                     </div>
                                 </div> 
                             </div>
+                            <div class="col-md-3"></div>
                         </div>
 
                     </div>
                 </div>
-                
+
             </div>
 
 
 
 
         </div>
-    
 
+        <?php
+        //Profil Form
+        include_once("./modals/ajouter_vehicule.php");
+        include_once("./modals/update_vehicule.php");
+        ?>
+    </body>
 
-</body>
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-<!--   Core JS Files   -->
-<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
 
-<!--  Checkbox, Radio & Switch Plugins -->
-<script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
+    <!--  Charts Plugin -->
+    <script src="assets/js/chartist.min.js"></script>
 
-<!--  Charts Plugin -->
-<script src="assets/js/chartist.min.js"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
 
-<!--  Notifications Plugin    -->
-<script src="assets/js/bootstrap-notify.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script src="assets/js/light-bootstrap-dashboard.js"></script>
 
-<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="assets/js/light-bootstrap-dashboard.js"></script>
-
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="assets/js/demo.js"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js"></script>
 
 </html>

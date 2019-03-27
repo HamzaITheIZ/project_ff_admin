@@ -1,10 +1,10 @@
 <?php
-include_once("./database/constants.php");
+/* include_once("./database/constants.php");
 
-if (!isset($_SESSION["userid"])) {
-    header("location:" . DOMAIN . "/index.php");
-}
-
+  if (!isset($_SESSION["userid"])) {
+  header("location:" . DOMAIN . "/index.php");
+  }
+ */
 ?>
 
 <!doctype html>
@@ -44,7 +44,7 @@ if (!isset($_SESSION["userid"])) {
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-        
+
     </head>
     <body>
 
@@ -58,7 +58,7 @@ if (!isset($_SESSION["userid"])) {
                     <div class="logo">
                         <a href="index.php" class="simple-text">
                             <span style="color:#fac564;"><i class="fas fa-pizza-slice"></i>
-                             HY's</span> 
+                                HY's</span> 
                             Neteat
                         </a>
                     </div>
@@ -95,14 +95,14 @@ if (!isset($_SESSION["userid"])) {
                                 <p>Les Vehicules</p>
                             </a>
                         </li>
-                  
+
                         <li>
                             <a href="commande.php">
                                 <i class="far fa-newspaper"></i>
                                 <p>commandes</p>
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -110,9 +110,9 @@ if (!isset($_SESSION["userid"])) {
             <div class="main-panel" >
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
-                       
+
                         <div class="collapse navbar-collapse">
-                   
+
 
                             <ul class="nav navbar-nav navbar-right">
 
@@ -130,7 +130,7 @@ if (!isset($_SESSION["userid"])) {
                 <div class="content" >
                     <div class="container-fluid" >
                         
-
+                        
                     </div>
                 </div>
             </div>

@@ -10,6 +10,23 @@ class Manage {
         $this->con = $db->connect();
     }
 
+    // method updated by your needs
+    public function fillAnyRecord($table) {
+        if ($table == "commande") {
+            $sql = "SELECT C.id,Cl.nom,Cl.cin,C.dateCommande,L.nom AS 'Livreur',V.numeroVehicule,C.etatLivraison from commande C INNER JOIN client Cl ON C.clientCommande=Cl.id LEFT JOIN vehicule V ON C.vehiculeUtiliser = V.id LEFT JOIN livreur L on C.livreurCommande = L.id ";
+        } else {
+            $sql = "SELECT * FROM " . $table . " ";
+        }
+        $result = $this->con->query($sql) or die($this->con->error);
+        $rows = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return ["rows" => $rows];
+    }
+
     public function getSingleRecord($table, $id) {
         $pre_stmt = $this->con->prepare("SELECT * FROM " . $table . " WHERE id = ? LIMIT 1");
         $pre_stmt->bind_param("i", $id);
@@ -21,6 +38,7 @@ class Manage {
         return $row;
     }
 
+    //delete li jab lah 
     public function deleteRecord($table, $id) {
 
         $pre_stmt = $this->con->prepare("DELETE FROM " . $table . " WHERE id = ?");
@@ -31,6 +49,7 @@ class Manage {
         }
     }
 
+    //best method you can ever seen xD 
     public function update_record($table, $where, $fields) {
         $sql = "";
         $condition = "";

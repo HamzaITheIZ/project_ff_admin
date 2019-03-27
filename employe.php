@@ -1,10 +1,10 @@
 <?php
-include_once("./database/constants.php");
+/*include_once("./database/constants.php");
 
 if (!isset($_SESSION["userid"])) {
     header("location:" . DOMAIN . "/index.php");
 }
-
+*/
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,7 +17,6 @@ if (!isset($_SESSION["userid"])) {
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
-
 
 
 
@@ -141,7 +140,7 @@ if (!isset($_SESSION["userid"])) {
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Prenom d'employé : </label>
-                                                        <input type="text" class="form-control" id="employe_prenom" name="employe_prenom">
+                                                        <input type="text" class="form-control border-danger" id="employe_prenom" name="employe_prenom">
                                                         <small id="p_error" class="form-text text-muted"></small>
                                                     </div>
                                                 </div>

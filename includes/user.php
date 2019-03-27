@@ -60,9 +60,9 @@ class User {
         }
     }
     
-     public function manageUsers($email) {
+     public function FillUsers() {
          
-        $sql = "SELECT id,cin,nom,email,adresse,telephone from employe where email not like '$email'";
+        $sql = "SELECT id,cin,nom,email,adresse,telephone from employe";
         $result = $this->con->query($sql) or die($this->con->error);
         $rows = array();
         if ($result->num_rows > 0) {
@@ -75,7 +75,8 @@ class User {
 
 }
 
-//$obj = new User();
+$obj = new User();
 //echo $obj->addemployes("Aqannai Hamza", "EE112233", "Hamza.1@gmail.com", "Hamza5555", "Thanaout", "0622558899");
 //echo $obj->userLogin("Hamza.1@gmail.com", "Hamza5555");
+//$obj->FillUsers("Hamza@gmail.com");
 ?>

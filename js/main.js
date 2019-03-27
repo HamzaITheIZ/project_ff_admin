@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var DOMAIN = "http://localhost/project_ff_admin";
+    //Create Employe
     $("#employe_form").on("submit", function () {
 
         var statusp = false;
@@ -116,7 +117,7 @@ $(document).ready(function () {
         }
 
     })
-
+//Login
     $("#form_login").on("submit", function () {
         var email = $("#log_email");
         var pass = $("#log_password");
@@ -159,6 +160,37 @@ $(document).ready(function () {
                         $(".overlay").hide();
                         console.log(data);
                         window.location.href = DOMAIN + "/dashboard.php";
+                    }
+                }
+            })
+        }
+    })
+
+    $("#ajouter_vehicule_form").on("submit", function () {
+        var statusv = false;
+        var vehicule = $("#modal_vehicule");
+
+        if (vehicule.val() == "") {
+            vehicule.addClass("border-danger");
+            $("#nv_error").html("<span class='text-danger'>S'il vous plaît entrer le prenom </span>");
+            statusv = false;
+        } else {
+            vehicule.removeClass("border-danger");
+            $("#nv_error").html("");
+            statusv = true;
+        }
+
+        if (statusv == true)
+        {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: $("#ajouter_vehicule_form").serialize(),
+                success: function (data) {
+                    if (data == "VEHICULE_ADDED") {
+                        alert("Le Vehicule est ajouter avec succes.!");
+                    } else {
+                        alert(data);
                     }
                 }
             })

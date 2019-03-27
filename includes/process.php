@@ -2,10 +2,11 @@
 include_once("../database/constants.php");
 include_once("user.php");
 include_once("manage.php");
+include_once("DBOperation.php");
 
 
-$email = $_SESSION["email"];
 
+//$email = $_SESSION["email"];
 //For Login 
 if (isset($_POST["log_email"]) AND isset($_POST["log_password"])) {
     $user = new User();
@@ -17,15 +18,15 @@ if (isset($_POST["log_email"]) AND isset($_POST["log_password"])) {
 //For Employe Creation
 if (isset($_POST["employe_nom"]) AND isset($_POST["employe_email"])) {
     $user = new User();
-    $result = $user->addemployes($_POST["employe_nom"]." ".$_POST["employe_prenom"],$_POST["employe_cin"], $_POST["employe_email"], $_POST["employe_password"], $_POST["employe_adresse"], $_POST["employe_tele"]);
+    $result = $user->addemployes($_POST["employe_nom"] . " " . $_POST["employe_prenom"], $_POST["employe_cin"], $_POST["employe_email"], $_POST["employe_password"], $_POST["employe_adresse"], $_POST["employe_tele"]);
     echo $result;
     exit();
 }
 
 //fill employe table
-if (isset($_POST["manageUser"])) {
+if (isset($_POST["manageEmploye"])) {
     $fu = new User();
-    $result = $fu->manageUsers($email);
+    $result = $fu->FillUsers();
     $rows = $result["rows"];
     if (count($rows) > 0) {
         foreach ($rows as $row) {
@@ -53,7 +54,7 @@ if (isset($_POST["deleteUser"])) {
     echo $result;
 }
 
-//Update Employe
+//getting Employe
 if (isset($_POST["updateUser"])) {
     $m = new Manage();
     $result = $m->getSingleRecord("employe", $_POST["id"]);
@@ -69,9 +70,179 @@ if (isset($_POST["modal_enom"])) {
     $cin = $_POST["modal_ecin"];
     $adresse = $_POST["modal_eadresse"];
     $tele = $_POST["modal_etele"];
-    
-    $result = $m->update_record("employe", ["id" => $id], ["nom"=>$nom, "cin" => $cin, "adresse" => $adresse,"telephone"=>$tele]);
+
+    $result = $m->update_record("employe", ["id" => $id], ["nom" => $nom, "cin" => $cin, "adresse" => $adresse, "telephone" => $tele]);
     echo $result;
 }
 
+//fill commande table
+if (isset($_POST["manageCommande"])) {
+    $m = new Manage();
+    $result = $m->fillAnyRecord("commande");
+    $rows = $result["rows"];
+    if (count($rows) > 0) {
+        foreach ($rows as $row) {
+            ?>
+            <tr class="text-center">
+                <td><?php echo $row["nom"]; ?></td>
+                <td><?php echo $row["cin"]; ?></td>
+                <td><?php echo $row["dateCommande"]; ?></td>
+                <td><?php echo $row["Livreur"]; ?></td>
+                <td><?php echo $row["numeroVehicule"]; ?></td>
+                <?php
+                if ($row["etatLivraison"] === "Pas Encore") {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-warning" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                } else if ($row["etatLivraison"] === "Sous Livraison") {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-info" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                } else {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-success" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                }
+                ?>
+                <td class="text-center">
+                    <a data-toggle="modal" data-target="#update_commande" eid="<?php echo $row['id']; ?>" class="btn btn-primary btn-sm edit_commande">Modifier</a>
+                    <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_commande">Supprimer</a>
+                </td>
+            </tr>
+            <?php
+        }
+        exit();
+    }
+}
+//Delete commande
+if (isset($_POST["deleteCommande"])) {
+    $m = new Manage();
+    $result = $m->deleteRecord("commande", $_POST["id"]);
+    echo $result;
+}
+
+//Getting Commande
+if (isset($_POST["updateCommande"])) {
+    $m = new Manage();
+    $result = $m->getSingleRecord("commande", $_POST["id"]);
+    echo json_encode($result);
+    exit();
+}
+
+//Update commande
+if (isset($_POST["select_etat"])) {
+    $m = new Manage();
+    $id = $_POST["id"];
+    $nomliv = $_POST["select_liv"];
+    $nv = $_POST["select_veh"];
+    $etat = $_POST["select_etat"];
+
+    $result = $m->update_record("commande", ["id" => $id], ["livreurCommande" => $nomliv, "vehiculeUtiliser" => $nv, "etatLivraison" => $etat]);
+    echo $result;
+}
+
+//Fetch Livreur
+if (isset($_POST["getLivreur"])) {
+    $obj = new DBOperation();
+    $rows = $obj->getAllRecord("livreur");
+    foreach ($rows as $row) {
+        echo "<option value='" . $row["id"] . "'>" . $row["nom"] . "</option>";
+    }
+    exit();
+}
+
+//Fetch Vehicule
+if (isset($_POST["getVehicule"])) {
+    $obj = new DBOperation();
+    $rows = $obj->getAllRecord("vehicule");
+    foreach ($rows as $row) {
+        echo "<option value='" . $row["id"] . "'>" . $row["numeroVehicule"] . "</option>";
+    }
+    exit();
+}
+
+//Add Vehicule
+if (isset($_POST["modal_vehicule"])) {
+    $obj = new DBOperation();
+    $result = $obj->addVehicule($_POST["modal_vehicule"]);
+    echo $result;
+    exit();
+}
+//Fill Vehicule Table
+if (isset($_POST["manageVehicule"])) {
+    $m = new Manage();
+    $result = $m->fillAnyRecord("vehicule");
+    $rows = $result["rows"];
+    if (count($rows) > 0) {
+        foreach ($rows as $row) {
+            ?>
+            <tr class="text-center">
+                <td><?php echo $row["numeroVehicule"]; ?></td>
+                <td><?php echo $row["etat"]; ?></td>
+                <?php
+                if ($row["etat"] === "Disponible") {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-success" role="alert"><?php echo $row["etat"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                } else {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-danger" role="alert"><?php echo $row["etat"]; ?></span>
+                        </div>
+                    </td>
+                <?php
+            }
+            ?>
+                <td class="text-center">
+                    <a data-toggle="modal" data-target="#update_vehicule" eid="<?php echo $row['id']; ?>" class="btn btn-primary btn-sm edit_vehicule">Modifier</a>
+                    <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_vehicule">Supprimer</a>
+                </td>
+            </tr>
+            <?php
+        }
+        exit();
+    }
+}
+//Delete commande
+if (isset($_POST["deleteVehicule"])) {
+    $m = new Manage();
+    $result = $m->deleteRecord("vehicule", $_POST["id"]);
+    echo $result;
+}
+
+//Getting Vehicule
+if (isset($_POST["updateVehicule"])) {
+    $m = new Manage();
+    $result = $m->getSingleRecord("vehicule", $_POST["id"]);
+    echo json_encode($result);
+    exit();
+}
+
+//Update Vehicule
+if (isset($_POST["select_vetat"])) {
+    $m = new Manage();
+    $id = $_POST["id"];
+    $numV = $_POST["num_vehicule"];
+    $etat = $_POST["select_vetat"];
+
+    $result = $m->update_record("vehicule", ["id" => $id], ["etat" => $etat, "numeroVehicule" => $numV]);
+    echo $result;
+}
 ?>

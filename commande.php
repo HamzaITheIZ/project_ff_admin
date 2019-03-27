@@ -1,3 +1,11 @@
+<?php
+/*include_once("./database/constants.php");
+
+if (!isset($_SESSION["userid"])) {
+    header("location:" . DOMAIN . "/index.php");
+}
+*/
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,6 +20,8 @@
 
 
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 
         <!-- Bootstrap core CSS     -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,6 +45,8 @@
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <script type="text/javascript" src="./js/manage.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/titles.css">
 
     </head>
     <body>
@@ -122,6 +134,9 @@
                     <div class="container-fluid" >
                         <div class="content" >
                             <div class="container-fluid">
+                                <div class="row text-center">
+                                    <h1 class="titles">Espace de Commandes</h1><br>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12 text-center">
                                         <div class="form-group">
@@ -132,39 +147,37 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="card">
-                                            <div class=" table table-responsive-md">
+                                            <div class="table table-responsive-md">
                                                 <table class="table table-hover thead-dark" border="0">
                                                     <thead class="thead-dark">
-                                                        <tr>
-                                                            <th>Nom de Plat</th>                                            
-                                                            <th>Nom de Client</th>
-                                                            <th>CIN</th>
-                                                            <th>Quantite</th>
-                                                            <th>Date de Commande</th>
-                                                            <th>Nom de Livreur</th>
-                                                            <th>Etat de Livraison</th>
-                                                            <th colspan="2" class="text-center">Operations</th>
+                                                        <tr>                                            
+                                                            <th class="text-center">Nom de Client</th>
+                                                            <th class="text-center">CIN</th>
+                                                            <th class="text-center">Date de Commande</th>
+                                                            <th class="text-center">Nom de Livreur</th>
+                                                            <th class="text-center">Vehicule Utiliser</th>
+                                                            <th class="text-center">Etat de Livraison</th>
+                                                            <th class="text-center">Operations</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Premier Plat</td>                                            
+                                                    <tbody  id="get_commande">
+                                                        <!--<tr class="text-center">
                                                             <td>Hamza Youssify</td>
                                                             <td>EE112233</td>
-                                                            <td>12</td>
                                                             <td>02/05/2019</td>
                                                             <td>Meryem</td>
-                                                            <td class="text-center"> 
+                                                            <td>V01</td>
+                                                            <td> 
                                                                 <div >
                                                                     <span class="alert alert-warning" role="alert">Sous Livraison</span>
                                                                 </div>
                                                             </td>
-                                                            <td colspan="2" class="text-center">
+                                                            <td class="text-center">
                                                                 <button type="button" class="btn btn-primary ">Modifier</button>
                                                                 <button type="button" class="btn btn-danger">supprimer</button>
                                                             </td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr class="text-center">
                                                             <td>Premier Plat</td>                                            
                                                             <td>Hamza Youssify</td>
                                                             <td>EE112233</td>
@@ -176,11 +189,11 @@
                                                                     <span class="alert alert-success" role="alert">Livrer</span>
                                                                 </div>
                                                             </td>
-                                                            <td colspan="2" class="text-center">
+                                                            <td class="text-center">
                                                                 <button type="button" class="btn btn-primary ">Modifier</button>
                                                                 <button type="button" class="btn btn-danger">supprimer</button>
                                                             </td>
-                                                        </tr>
+                                                        </tr>-->
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -201,7 +214,10 @@
         </div>
     </div>
 
-
+<?php
+    //Profil Form
+    include_once("./modals/update_commande.php");
+    ?>
 </body>
 
 <!--   Core JS Files   -->
