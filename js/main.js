@@ -189,6 +189,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data == "VEHICULE_ADDED") {
                         alert("Le Vehicule est ajouter avec succes.!");
+                        window.location.href = "";
                     } else {
                         alert(data);
                     }
@@ -197,7 +198,87 @@ $(document).ready(function () {
         }
     })
 
+    //Create Livreur
+    $("#ajouter_livreur_form").on("submit", function () {
 
+        var statusp = false;
+        var statusn = false;
+        var statuscin = false;
+        var statusa = false;
+        var statust = false;
+        var status = false;
+        var nom = $("#nom_livreur");
+        var prenom = $("#prenom_livreur");
+        var cin = $("#cin_livreur");
+        var telephone = $("#tele_livreur");
+        var adresse = $("#adresse_livreur");
+
+
+        var cin_patt = new RegExp(/^[A-Z]{2}[0-9]{6}$/);
+        var tele_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
+
+        if (prenom.val() == "") {
+            prenom.addClass("border-danger");
+            $("#pl_error").html("<span class='text-danger'>S'il vous plaît entrer le prenom </span>");
+            statusp = false;
+        } else {
+            prenom.removeClass("border-danger");
+            $("#pl_error").html("");
+            statusp = true;
+        }
+        if (nom.val() == "") {
+            nom.addClass("border-danger");
+            $("#nl_error").html("<span class='text-danger'>S'il vous plaît entrer le nom </span>");
+            statusn = false;
+        } else {
+            nom.removeClass("border-danger");
+            $("#nl_error").html("");
+            statusn = true;
+        }
+        if (!cin_patt.test(cin.val())) {
+            cin.addClass("border-danger");
+            $("#cinl_error").html("<span class='text-danger'>Entrer une Valide CIN </span>");
+            statuscin = false;
+        } else {
+            cin.removeClass("border-danger");
+            $("#cinl_error").html("");
+            statuscin = true;
+        }
+        if (adresse.val() == "") {
+            adresse.addClass("border-danger");
+            $("#al_error").html("<span class='text-danger'>Veuillez entrer Livreur adresse</span>");
+            statusa = false;
+        } else {
+            adresse.removeClass("border-danger");
+            $("#al_error").html("");
+            statusa = true;
+        }
+        if (!tele_patt.test(telephone.val())) {
+            telephone.addClass("border-danger");
+            $("#tl_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
+            statust = false;
+        } else {
+            telephone.removeClass("border-danger");
+            $("#tl_error").html("");
+            statust = true;
+        }
+        if (statusp == true && statusn == true && statuscin == true && statusa == true && statust == true)
+        {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: $("#ajouter_livreur_form").serialize(),
+                success: function (data) {
+                    if (data == "LIVREUR_ADDED") {
+                        alert("Le Livreur est bien ajouter !");
+                        window.location.href = "";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
+        }
+    })
 
 
 })

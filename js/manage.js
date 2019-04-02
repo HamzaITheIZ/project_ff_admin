@@ -141,7 +141,7 @@ $(document).ready(function () {
             }
         })
     }
-    
+
     //Delete Commande
     $("body").delegate(".del_commande", "click", function () {
         var did = $(this).attr("did");
@@ -162,8 +162,8 @@ $(document).ready(function () {
             })
         }
     })
-    
-      //Fill for update Commande
+
+    //Fill for update Commande
     $("body").delegate(".edit_commande", "click", function () {
         var eid = $(this).attr("eid");
         $.ajax({
@@ -177,10 +177,10 @@ $(document).ready(function () {
                 $("#select_liv").val(data["livreurCommande"]);
                 $("#select_veh").val(data["vehiculeUtiliser"]);
                 $("#select_etat").val(data["etatLivraison"]);
-          }
+            }
         })
     })
-    
+
     //Update Commande
     $("#update_commande_form").on("submit", function () {
         var statusl = false;
@@ -209,7 +209,7 @@ $(document).ready(function () {
             $("#v_error").html("");
             statusv = true;
         }
-        
+
         if (statusl == true && statusv == true)
         {
             $.ajax({
@@ -229,8 +229,8 @@ $(document).ready(function () {
             alert("Votre entries est invalide!");
         }
     })
-    
-      //Fetch Livreur
+
+    //Fetch Livreur
     fetch_livreur();
     function fetch_livreur() {
         $.ajax({
@@ -257,8 +257,8 @@ $(document).ready(function () {
             }
         })
     }
-    
-    
+
+
     //Fill Vehicule
     fillVehicule();
     function fillVehicule() {
@@ -271,7 +271,7 @@ $(document).ready(function () {
             }
         })
     }
-    
+
     //Delete Vehicule
     $("body").delegate(".del_vehicule", "click", function () {
         var did = $(this).attr("did");
@@ -292,8 +292,8 @@ $(document).ready(function () {
             })
         }
     })
-    
-      //Fill for update Vehicule
+
+    //Fill for update Vehicule
     $("body").delegate(".edit_vehicule", "click", function () {
         var eid = $(this).attr("eid");
         $.ajax({
@@ -306,13 +306,13 @@ $(document).ready(function () {
                 $("#id").val(data["id"]);
                 $("#select_vetat").val(data["etat"]);
                 $("#num_vehicule").val(data["numeroVehicule"]);
-          }
+            }
         })
     })
-    
-    //Update Commande
+
+    //Update Vehicule
     $("#update_vehicule_form").on("submit", function () {
-        
+
         var statusv = true;
         var vehicule = $("#num_vehicule");
 
@@ -325,7 +325,7 @@ $(document).ready(function () {
             $("#vn_error").html("");
             statusv = true;
         }
-        
+
         if (statusv == true)
         {
             $.ajax({
@@ -344,4 +344,182 @@ $(document).ready(function () {
         }
     })
 
+    //Fill CLients
+    fillClient();
+    function fillClient() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {manageClient: 1},
+            success: function (data) {
+                $("#get_client").html(data);
+            }
+        })
+    }
+
+    //Delete Clients
+    $("body").delegate(".del_client", "click", function () {
+        var did = $(this).attr("did");
+        if (confirm("Êtes-vous sûr ? Vous voulez supprimer!")) {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: {deleteClient: 1, id: did},
+                success: function (data) {
+                    if (data == "DELETED") {
+                        alert("Le Client est bien supprimé!");
+                        fillClient();
+                    } else {
+                        alert(data);
+                    }
+
+                }
+            })
+        }
+    })
+
+    //Fill Livreurs
+    fillLivreur();
+    function fillLivreur() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {manageLivreur: 1},
+            success: function (data) {
+                $("#get_livreur").html(data);
+            }
+        })
+    }
+
+    //Delete Livreur
+    $("body").delegate(".del_livreur", "click", function () {
+        var did = $(this).attr("did");
+        if (confirm("Êtes-vous sûr ? Vous voulez supprimer!")) {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: {deleteLivreur: 1, id: did},
+                success: function (data) {
+                    if (data == "DELETED") {
+                        alert("Le Livreur est bien supprimé");
+                        fillLivreur();
+                    } else {
+                        alert("Cet Livreur est en travail tu ne peut pas le Supprimer!");
+                    }
+
+                }
+            })
+        }
+    })
+
+    //Fill for update Livreur
+    $("body").delegate(".edit_livreur", "click", function () {
+        var eid = $(this).attr("eid");
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            dataType: "json",
+            data: {updateLivreur: 1, id: eid},
+            success: function (data) {
+                console.log(data);
+                $("#id").val(data["id"]);
+                $("#unom_livreur").val(data["nom"]);
+                $("#ucin_livreur").val(data["cin"]);
+                $("#uadresse_livreur").val(data["adresse"]);
+                $("#utele_livreur").val(data["telephone"]);
+                $("#etat_livreur").val(data["etat"]);
+            }
+        })
+    })
+    //Update Livreur
+    $("#update_livreur_form").on("submit", function () {
+
+        var statusp = false;
+        var statusn = false;
+        var statuscin = false;
+        var statusa = false;
+        var statust = false;
+        var status = false;
+        var nom = $("#unom_livreur");
+        var prenom = $("#uprenom_livreur");
+        var cin = $("#ucin_livreur");
+        var telephone = $("#utele_livreur");
+        var adresse = $("#uadresse_livreur");
+        var etat = $("#etat_livreur");
+
+
+        var cin_patt = new RegExp(/^[A-Z]{2}[0-9]{6}$/);
+        var tele_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
+
+        if (prenom.val() == "") {
+            prenom.addClass("border-danger");
+            $("#upl_error").html("<span class='text-danger'>S'il vous plaît entrer le prenom </span>");
+            statusp = false;
+        } else {
+            prenom.removeClass("border-danger");
+            $("#upl_error").html("");
+            statusp = true;
+        }
+        if (nom.val() == "") {
+            nom.addClass("border-danger");
+            $("#unl_error").html("<span class='text-danger'>S'il vous plaît entrer le nom </span>");
+            statusn = false;
+        } else {
+            nom.removeClass("border-danger");
+            $("#unl_error").html("");
+            statusn = true;
+        }
+        if (!cin_patt.test(cin.val())) {
+            cin.addClass("border-danger");
+            $("#ucinl_error").html("<span class='text-danger'>Entrer une Valide CIN </span>");
+            statuscin = false;
+        } else {
+            cin.removeClass("border-danger");
+            $("#ucinl_error").html("");
+            statuscin = true;
+        }
+        if (adresse.val() == "") {
+            adresse.addClass("border-danger");
+            $("#ual_error").html("<span class='text-danger'>Veuillez entrer Livreur adresse</span>");
+            statusa = false;
+        } else {
+            adresse.removeClass("border-danger");
+            $("#ual_error").html("");
+            statusa = true;
+        }
+        if (!tele_patt.test(telephone.val())) {
+            telephone.addClass("border-danger");
+            $("#utl_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
+            statust = false;
+        } else {
+            telephone.removeClass("border-danger");
+            $("#utl_error").html("");
+            statust = true;
+        }
+        if (etat.val() == "") {
+            etat.addClass("border-danger");
+            $("#el_error").html("<span class='text-danger'>Veuillez Choisir Un Etat</span>");
+            status = false;
+        } else {
+            etat.removeClass("border-danger");
+            $("#el_error").html("");
+            status = true;
+        }
+        if (status == true && statusp == true && statusn == true && statuscin == true && statusa == true && statust == true)
+        {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: $("#update_livreur_form").serialize(),
+                success: function (data) {
+                    if (data == "UPDATED") {
+                        alert("Le Livreur est modifier avec succès.!");
+                        window.location.href = "";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
+        }
+    })
 })

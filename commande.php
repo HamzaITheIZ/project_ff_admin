@@ -93,6 +93,12 @@ if (!isset($_SESSION["userid"])) {
                             </a>
                         </li>
                         <li>
+                            <a href="livreur.php">
+                                <i class="fas fa-running"></i>
+                                <p>Les Livreurs</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="vehicule.php">
                                 <i class="fas fa-shuttle-van"></i>
                                 <p>Les Vehicules</p>
@@ -207,12 +213,7 @@ if (!isset($_SESSION["userid"])) {
                 </div>
 
             </div>
-
-
-
-
         </div>
-    </div>
 
 <?php
     //Profil Form

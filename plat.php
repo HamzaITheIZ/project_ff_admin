@@ -106,6 +106,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="livreur.php">
+                                <i class="fas fa-running"></i>
+                                <p>Les Livreurs</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="vehicule.php">
                                 <i class="fas fa-shuttle-van"></i>
                                 <p>Les Vehicules</p>

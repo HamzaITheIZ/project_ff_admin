@@ -5,15 +5,15 @@
         <!--<link rel="icon" type="image/png" href="assets/img/favicon.ico">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>CLIENTS</title>
+        <title>LIVREURS</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
 
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
         <!-- Bootstrap core CSS     -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -36,8 +36,9 @@
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <script type="text/javascript" src="./js/main.js"></script>
         <script type="text/javascript" src="./js/manage.js"></script>
-        <link rel="stylesheet" type="text/css" href="./css/titles.css">
+        <link rel="stylesheet" href="./css/titles.css">
 
     </head>
     <body>
@@ -65,23 +66,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="employe.php">                      
+                            <a href="employe.php">
+                                <!--<i class="pe-7s-user"></i>        -->                        
                                 <i class="fas fa-user-tie"></i>
-                                <p>
-                                    LES EMPLOYES
-                                    <!--<b class="caret"></b>-->
-                                </p>
+                                <p>LES EMPLOYES</p>
                             </a>
-                            <!--<ul class="nav collapse" style="height: 0px;">
-                                <li>
-                                    <a class="nav-link" aria-current="false" href="employe.php">
-                                        <span class="sidebar-mini">E</span>
-                                        <span class="sidebar-normal">Employes</span>
-                                    </a>
-                                </li>
-                            </ul>-->
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="client.php">
                                 <i class="fas fa-users"></i>
                                 <p>Les Clients</p>
@@ -93,7 +84,7 @@
                                 <p>Les plats</p>
                             </a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="livreur.php">
                                 <i class="fas fa-running"></i>
                                 <p>Les Livreurs</p>
@@ -136,76 +127,75 @@
                     </div>
                 </nav>
 
-                <div class="content">
+                <div class="content" >
                     <div class="container-fluid" >
-                        <div class="content" >
-                            <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
                                 <div class="row text-center">
-                                    <h1 class="titles">Espace de Clients</h1><br>
+                                    <h1 class="titles">Espace de Livreurs</h1><br>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-12 text-center">
-                                        <div class="form-group">
-                                            <span class="form-control">Liste Des Clients</span>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row text-center">                     
+                                    <button href="#" data-toggle="modal" data-target="#ajouter_livreur" class="btn btn-primary " style="width: 200px;height: 50px; text-align: center;">Ajouter Livreur</button>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="table table-responsive-md">
-                                                <table class="table table-hover thead-dark" border="0">
-                                                    <thead class="thead-dark">
-                                                        <tr>                                            
-                                                            <th class="text-center">Nom Complet</th>                                            
-                                                            <th class="text-center">Cin</th>
-                                                            <th class="text-center">Email</th>
-                                                            <th class="text-center">Adresse</th>
-                                                            <th class="text-center">Tele</th>
-                                                            <th class="text-center">Mot de passe</th>
-                                                            <th class="text-center">Supprimer le Client</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody  id="get_client">
-                                                        <!--<tr class="text-center">
-                                                            <td>Youssef AitAbdellah</td>                                            
-                                                            <td>EE111111</td>
-                                                            <td>NU@anim.com</td>
-                                                            <td>Japon,Tokyo</td>
-                                                            <td>0625361478</td>
-                                                            <td>dattebayo</td>
-                                                            <td colspan="2" class="text-center">
-                                                                <button type="button" class="btn btn-primary ">Modifier</button>
-                                                                <button type="button" class="btn btn-danger">supprimer</button>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="text-center">
-                                                            <td>Hamza Aqannai</td>                                            
-                                                            <td>EE222222</td>
-                                                            <td>Hamza@gmail.com</td>
-                                                            <td>Maroc,Marrakech,Tahanout</td>
-                                                            <td>0626049773</td>
-                                                            <td>Hamza8520</td>
-                                                            <td colspan="2" class="text-center">
-                                                                <button type="button" class="btn btn-primary ">Modifier</button>
-                                                                <button type="button" class="btn btn-danger">supprimer</button>
-                                                            </td>
-                                                        </tr>-->
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center">
+                                <div class="form-group">
+                                    <span class="form-control">Liste Des Livreurs</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class=" table table-responsive-md">
+                                        <table class="table table-hover thead-dark" border="0">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th class="text-center">Nom Complet</th>                                            
+                                                    <th class="text-center">CIN</th>
+                                                    <th class="text-center">Adresse</th>
+                                                    <th class="text-center">Telephone</th>
+                                                    <th class="text-center">La présence</th>
+                                                    <th class="text-center">Operations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="get_livreur">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
+
+
+
+
         </div>
 
-
+        <?php
+        //Profil Form
+        include_once("./modals/ajouter_livreur.php");
+        include_once("./modals/update_livreur.php");
+        ?>
     </body>
 
     <!--   Core JS Files   -->

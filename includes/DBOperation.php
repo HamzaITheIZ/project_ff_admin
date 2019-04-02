@@ -41,6 +41,19 @@ class DBOperation {
             return 0;
         }
     }
+    
+    public function addLivreur($nom,$cin,$adresse,$telephone) {
+        $pre_stmt = $this->con->prepare("INSERT INTO `livreur`(`nom`, `cin` ,`adresse` ,`telephone`,`etat`)
+		 VALUES (?,?,?,?,?)");
+        $etat = "Disponible";
+        $pre_stmt->bind_param("sssss", $nom , $cin , $adresse , $telephone , $etat);
+        $result = $pre_stmt->execute() or die($this->con->error);
+        if ($result) {
+            return "LIVREUR_ADDED";
+        } else {
+            return 0;
+        }
+    }
 
 }
 

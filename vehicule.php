@@ -84,6 +84,12 @@
                                 <p>Les plats</p>
                             </a>
                         </li>
+                        <li>
+                            <a href="livreur.php">
+                                <i class="fas fa-running"></i>
+                                <p>Les Livreurs</p>
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="vehicule.php">
                                 <i class="fas fa-shuttle-van"></i>

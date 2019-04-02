@@ -75,7 +75,7 @@ class User {
 
 }
 
-$obj = new User();
+//$obj = new User();
 //echo $obj->addemployes("Aqannai Hamza", "EE112233", "Hamza.1@gmail.com", "Hamza5555", "Thanaout", "0622558899");
 //echo $obj->userLogin("Hamza.1@gmail.com", "Hamza5555");
 //$obj->FillUsers("Hamza@gmail.com");
