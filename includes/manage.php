@@ -13,7 +13,7 @@ class Manage {
     // method updated by your needs
     public function fillAnyRecord($table) {
         if ($table == "commande") {
-            $sql = "SELECT C.id,Cl.nom,Cl.cin,C.dateCommande,L.nom AS 'Livreur',V.numeroVehicule,C.etatLivraison from commande C INNER JOIN client Cl ON C.clientCommande=Cl.id LEFT JOIN vehicule V ON C.vehiculeUtiliser = V.id LEFT JOIN livreur L on C.livreurCommande = L.id ";
+            $sql = "SELECT C.id,Cl.nom,Cl.cin,C.dateCommande,L.id AS 'fourid',L.nom AS 'Livreur',V.id AS 'idvehi',V.numeroVehicule,C.etatLivraison from commande C INNER JOIN client Cl ON C.clientCommande=Cl.id LEFT JOIN vehicule V ON C.vehiculeUtiliser = V.id LEFT JOIN livreur L on C.livreurCommande = L.id ";
         } else {
             $sql = "SELECT * FROM " . $table . " ";
         }
@@ -68,7 +68,26 @@ class Manage {
             return "UPDATED";
         }
     }
+    
+    public function checkfourpresence($table,$id) {
+        if($table == "livreur"){
+            $sql = "SELECT * FROM `livreur` L INNER JOIN commande C on L.id = C.livreurCommande WHERE L.id = ? AND C.etatLivraison = 'Sous Livraison'";
+        }else{
+            $sql = "SELECT * FROM `vehicule` V INNER JOIN commande C on V.id = C.vehiculeUtiliser WHERE V.id = ? AND C.etatLivraison = 'Sous Livraison'";
+        }
+        $pre_stmt = $this->con->prepare($sql);
+        $pre_stmt->bind_param("i",$id);
+        $pre_stmt->execute() or die($this->con->error);
+        $result = $pre_stmt->get_result();
+        if ($result->num_rows > 0) {
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
 
 }
-
+//$m = new Manage();
+//echo $m->checkfourpresence(1);
 ?>

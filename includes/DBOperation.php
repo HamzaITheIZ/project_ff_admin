@@ -13,9 +13,15 @@ class DBOperation {
         $this->con = $db->connect();
     }
 
-
     public function getAllRecord($table) {
-        $pre_stmt = $this->con->prepare("SELECT * FROM " . $table);
+        if($table == "livreur") {
+            $sql = "SELECT * FROM " . $table . "";
+        } else if ($table == "vehicule") {
+            $sql = "SELECT * FROM " . $table . "";
+        } else {
+            $sql = "SELECT * FROM " . $table;
+        }
+        $pre_stmt = $this->con->prepare($sql);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
         $rows = array();
@@ -28,12 +34,11 @@ class DBOperation {
         return "NO_DATA";
     }
 
-    
     public function addVehicule($vehicule) {
         $pre_stmt = $this->con->prepare("INSERT INTO `vehicule`(`etat`, `numeroVehicule`)
 		 VALUES (?,?)");
         $etat = "Disponible";
-        $pre_stmt->bind_param("ss", $etat , $vehicule);
+        $pre_stmt->bind_param("ss", $etat, $vehicule);
         $result = $pre_stmt->execute() or die($this->con->error);
         if ($result) {
             return "VEHICULE_ADDED";
@@ -41,12 +46,12 @@ class DBOperation {
             return 0;
         }
     }
-    
-    public function addLivreur($nom,$cin,$adresse,$telephone) {
+
+    public function addLivreur($nom, $cin, $adresse, $telephone) {
         $pre_stmt = $this->con->prepare("INSERT INTO `livreur`(`nom`, `cin` ,`adresse` ,`telephone`,`etat`)
 		 VALUES (?,?,?,?,?)");
         $etat = "Disponible";
-        $pre_stmt->bind_param("sssss", $nom , $cin , $adresse , $telephone , $etat);
+        $pre_stmt->bind_param("sssss", $nom, $cin, $adresse, $telephone, $etat);
         $result = $pre_stmt->execute() or die($this->con->error);
         if ($result) {
             return "LIVREUR_ADDED";

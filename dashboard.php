@@ -44,6 +44,7 @@
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./css/titles.css">
 
     </head>
     <body>
@@ -129,7 +130,30 @@
 
                 <div class="content" >
                     <div class="container-fluid" >
-                        
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="card card-stats">
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="col-xs-5">
+                                                <div><button class="btn btn-warning" style="width: 50px;height: 50px;"><i class="fas fa-align-justify"></i></button></div>
+                                            </div>
+                                            <div class="col-xs-7">
+                                                <div class="row">
+                                                    <div class="col-md-8"><p class="titles">koko</p></div>
+                                                    <div class="col-md-4" style="line-height: 48px; font-weight: bold; font-size: 20px; font-style: italic;">150</div>
+                                                </div>
+                                            </div>
+                                            <div class="footer">
+                                                <div class="stats">
+                                                    <a href="#"><i class="fas fa-retweet">&nbsp;</i>Mis a Jour</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                     </div>
                 </div>

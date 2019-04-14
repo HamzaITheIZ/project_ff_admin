@@ -54,7 +54,7 @@ if (isset($_SESSION["userid"])) {
                     </div>
 
                     <div class="inputWithIcon inputIconBg">
-                        <input type="text" placeholder="Entre Le Mot de Passe" id="log_password" name="log_password">
+                        <input type="password" placeholder="Entre Le Mot de Passe" id="log_password" name="log_password">
                         <i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i>
                         <small id="p_error" class="form-text text-muted"></small>
                     </div>
