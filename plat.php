@@ -1,7 +1,11 @@
 <?php
+include_once("./database/constants.php");
 include ('./classes/Plat.php');
 include ('./services/PlatService.php');
 
+if (!isset($_SESSION["userid"])) {
+    header("location:" . DOMAIN . "/index.php");
+}
 
 
 if (isset($_POST['add'])) {

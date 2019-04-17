@@ -107,6 +107,7 @@ $(document).ready(function () {
                         alert("Vérifier vos entrées s'il manque quelque chose");
                     } else {
                         alert("Employe Ajouter avec Succes");
+                        window.location.href = "";
                     }
                 }
             })
