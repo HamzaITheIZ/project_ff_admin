@@ -46,6 +46,7 @@ if (!isset($_SESSION["userid"])) {
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
         <script type="text/javascript" src="./js/main.js"></script>
         <script type="text/javascript" src="./js/manage.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/titles.css">
 
 
     </head>
@@ -136,6 +137,9 @@ if (!isset($_SESSION["userid"])) {
                 </nav>
                 <div class="content" >
                     <div class="container-fluid" >
+                        <div class="row text-center">
+                            <h1 class="titles">Espace de Employes</h1><br>
+                        </div>
                         <div class="row">
                             <div class="col-md-11">
                                 <div class="card">

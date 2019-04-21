@@ -14,7 +14,7 @@ class DBOperation {
     }
 
     public function getAllRecord($table) {
-        if($table == "livreur") {
+        if ($table == "livreur") {
             $sql = "SELECT * FROM " . $table . "";
         } else if ($table == "vehicule") {
             $sql = "SELECT * FROM " . $table . "";
@@ -60,6 +60,31 @@ class DBOperation {
         }
     }
 
+    //For Stat
+    public function getAllStat($table) {
+
+        $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
+
+        $pre_stmt = $this->con->prepare($sql);
+        $pre_stmt->execute() or die($this->con->error);
+        $result = $pre_stmt->get_result();
+        $rows = array();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            return $row;
+        } else if ($result->num_rows > 1) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
+        } else {
+            return $rows;
+        }
+    }
+
 }
+//$m = new DBOperation();
+//print_r($m ->getAllStat("plat"));
+
 
 ?>

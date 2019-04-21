@@ -377,4 +377,42 @@ if (isset($_POST["etat_livreur"])) {
     $result = $m->update_record("livreur", ["id" => $id], ["nom" => $nom, "cin" => $cin, "adresse" => $adresse, "telephone" => $tele, "etat" => $etat]);
     echo $result;
 }
+
+//----------------Stat------------------
+//Plat Stat
+if (isset($_POST["statPlat"])) {
+    $obj = new DBOperation();
+    $row = $obj->getAllStat("plat");
+
+    echo $row["Stat"];
+
+    exit();
+}
+//Commande Stat
+if (isset($_POST["statCommande"])) {
+    $obj = new DBOperation();
+    $row = $obj->getAllStat("commande");
+
+    echo $row["Stat"];
+
+    exit();
+}
+//Commande Stat
+if (isset($_POST["statClient"])) {
+    $obj = new DBOperation();
+    $row = $obj->getAllStat("client");
+
+    echo $row["Stat"];
+
+    exit();
+}
+//Commande Stat
+if (isset($_POST["statSales"])) {
+    $obj = new DBOperation();
+    $row = $obj->getAllStat("ligne_commande");
+
+    echo $row["Stat"];
+
+    exit();
+}
 ?>

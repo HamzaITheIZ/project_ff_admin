@@ -281,5 +281,57 @@ $(document).ready(function () {
         }
     })
 
+    //Fetch Plat Stat
+    fetch_Plat_Stat();
+    function fetch_Plat_Stat() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {statPlat: 1},
+            success: function (data) {
+                $("#pl").html(data);
+            }
+        })
+    }
+
+    //Fetch Command Stat
+    fetch_Commande_Stat();
+    function fetch_Commande_Stat() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {statCommande: 1},
+            success: function (data) {
+                $("#cm").html(data);
+            }
+        })
+    }
+
+    //Fetch Client Stat
+    fetch_Client_Stat();
+    function fetch_Client_Stat() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {statClient: 1},
+            success: function (data) {
+                $("#cl").html(data);
+            }
+        })
+    }
+    
+        //Fetch sales
+    fetch_Sales_Stat();
+    function fetch_Sales_Stat() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {statSales: 1},
+            success: function (data) {
+                $("#sl").html(data);
+            }
+        })
+    }
+
 
 })

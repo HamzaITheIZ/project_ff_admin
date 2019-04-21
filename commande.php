@@ -140,7 +140,7 @@ if (!isset($_SESSION["userid"])) {
                         <div class="content" >
                             <div class="container-fluid">
                                 <div class="row text-center">
-                                    <h1 class="titles">Espace de Commandes</h1><br>
+                                    <h1 class="titles">Gestion de Commandes</h1><br>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 text-center">

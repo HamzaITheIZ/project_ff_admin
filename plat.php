@@ -174,6 +174,7 @@ function checkInput($data) {
                 event.preventDefault();
             }
         </script>
+        <link rel="stylesheet" type="text/css" href="./css/titles.css">
 
     </head>
     <body>
@@ -270,6 +271,9 @@ function checkInput($data) {
 
                 <div class="content" id="ctn">
                     <div class="container-fluid" >
+                        <div class="row text-center">
+                            <h1 class="titles">Gestion de Plas</h1><br>
+                        </div>
                         <div class="row">
                             <div class="col-md-2">
 
@@ -359,11 +363,11 @@ function checkInput($data) {
                                     <div class=" table table-responsive-md">
                                         <table class="table table-hover thead-dark" border="0">
                                             <thead class="thead-dark">
-                                                    <th class="text-center">Photo</th>                                            
-                                                    <th class="text-center">Nom de Plat</th>
-                                                    <th class="text-center">Prix</th>
+                                            <th class="text-center">Photo</th>                                            
+                                            <th class="text-center">Nom de Plat</th>
+                                            <th class="text-center">Prix</th>
 
-                                                    <th class="text-center">Operations</th>
+                                            <th class="text-center">Operations</th>
                                             </thead>
                                             <tbody class="text-center" id="container">
                                                 <!--<tr>

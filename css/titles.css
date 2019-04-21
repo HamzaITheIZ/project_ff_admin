@@ -1,8 +1,31 @@
 .titles{
-color: #7c795d;
-font-family: 'Trocchi', serif;
-font-size: 45px;
-font-weight: normal;
-line-height: 48px;
-margin: 0;
+    color: #30231d;
+    font-family: 'Merriweather Sans';
+    font-size: 66px;
+    font-weight: 800;
+    line-height: 78px;
+    letter-spacing: -4px;
+    margin-bottom: 72px;
+}
+
+.titles2{
+    color: #111;
+    font-family: 'Amaranth';
+    font-size: 60px;
+    font-weight: 900;
+    line-height: 60px;
+    margin-bottom: 60px;
+    padding-left: 100px;
+    position: relative;
+} 
+
+.titles2:before {
+    background: #111;
+    content: '';
+    display: block;
+    height: 60px;
+    left: 0px;
+    position: absolute;
+    top: 10px;
+    width: 6px;
 }
