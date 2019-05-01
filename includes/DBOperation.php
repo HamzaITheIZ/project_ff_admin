@@ -82,9 +82,26 @@ class DBOperation {
         }
     }
 
+    public function checkCommandePlus() {
+
+        $sql = "SELECT Count(*) as 'Count' FROM commande";
+
+        $pre_stmt = $this->con->prepare($sql);
+        $pre_stmt->execute() or die($this->con->error);
+        $result = $pre_stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+        }
+        if($row["Count"] > $_SESSION["CommandeCount"]){
+            $_SESSION["CommandeCount"] = $row["Count"];
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
 }
+
 //$m = new DBOperation();
 //print_r($m ->getAllStat("plat"));
-
-
 ?>

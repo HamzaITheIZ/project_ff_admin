@@ -17,7 +17,7 @@ $(document).ready(function () {
         var contenu = $('#container');
         var ligne = "";
         for (i = 0; i < data.length; i++) {
-         //   ligne += '<tr><td><img class="img-circle" src="photos\\' + data[i].photo + '" width="50" height="50" /><td>' + data[i].nom + '</td><td>' + data[i].prix + '</td><td class="text-center"><button class="btn btn-primary" indice="' + data[i].id + '">Modifer</button><button class="btn btn-danger" indice="' + data[i].id + '">Supprimer</button></td></tr>';
+            //   ligne += '<tr><td><img class="img-circle" src="photos\\' + data[i].photo + '" width="50" height="50" /><td>' + data[i].nom + '</td><td>' + data[i].prix + '</td><td class="text-center"><button class="btn btn-primary" indice="' + data[i].id + '">Modifer</button><button class="btn btn-danger" indice="' + data[i].id + '">Supprimer</button></td></tr>';
             ligne += '<tr><td><img class="img-circle" src="photos\\' + data[i].photo + '" width="50" height="50" /><td>' + data[i].nom + '</td><td>' + data[i].prix + '</td><td class="text-center"><button class="btn btn-primary" indice="' + data[i].id + '">Modifier</button>&nbsp;<button class="btn btn-danger" indice="' + data[i].id + '">Supprimer</button></td></tr>';
         }
         contenu.html(ligne);
@@ -50,11 +50,11 @@ $(document).ready(function () {
         var id = $(this).attr('indice');
         $('#idSaver').val($(this).attr('indice'));
         $('#add').html('Modifier plat');
-        
+
         //$('#ctn').css("background-color", "yellow");
-       // $('html, #ctn').animate({scrollTop:0},800);
-       // alert('up');
-        
+        // $('html, #ctn').animate({scrollTop:0},800);
+        // alert('up');
+
         $.ajax({
             url: 'control/loadPlat.php',
             data: {id: id},
@@ -64,7 +64,7 @@ $(document).ready(function () {
                 $('#description').val(data.description);
                 $('#prix').val(data.prix);
                 //$('#photoP').val(data.photo);
-              //  alert($('#photoP').val());
+                //  alert($('#photoP').val());
                 $('#preview').attr('src', 'photos\\' + data.photo);
 
             },
@@ -75,7 +75,27 @@ $(document).ready(function () {
 
     });
 
+    $("#search").keyup(function () {
+        search_table($(this).val());
+    })
 
+    function search_table(value) {
+        $(".table_search tr").each(function () {
+            var found = "false";
+            $(this).each(function () {
+                if ($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                    found = "true";
+                }
+            })
+            if (found == "true")
+            {
+                $(this).show();
+            } else
+            {
+                $(this).hide();
+            }
+        })
+    }
 
 
 });

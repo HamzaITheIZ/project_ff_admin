@@ -53,15 +53,27 @@ class User {
                 $_SESSION["userid"] = $row["id"];
                 $_SESSION["email"] = $row["email"];
                 $_SESSION["username"] = $row["nom"];
+
+                //Fill Count Commande Found
+                $sql = "SELECT Count(*) as 'Count' FROM commande";
+
+                $pre_stmt = $this->con->prepare($sql);
+                $pre_stmt->execute() or die($this->con->error);
+                $result = $pre_stmt->get_result();
+                if ($result->num_rows == 1) {
+                    $row = $result->fetch_assoc();
+                    $_SESSION["CommandeCount"] = $row["Count"];
+                }
+                
                 return 1;
             } else {
                 return "PASSWORD_NOT_MATCHED";
             }
         }
     }
-    
-     public function FillUsers() {
-         
+
+    public function FillUsers() {
+
         $sql = "SELECT id,cin,nom,email,adresse,telephone from employe";
         $result = $this->con->query($sql) or die($this->con->error);
         $rows = array();

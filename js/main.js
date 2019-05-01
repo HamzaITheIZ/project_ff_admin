@@ -289,7 +289,12 @@ $(document).ready(function () {
             method: "POST",
             data: {statPlat: 1},
             success: function (data) {
-                $("#pl").html(data);
+                var stat = data;
+                if(data * 1 < 10)
+                {
+                    stat = "0"+data;
+                }
+                $("#pl").html(stat);
             }
         })
     }
@@ -302,7 +307,12 @@ $(document).ready(function () {
             method: "POST",
             data: {statCommande: 1},
             success: function (data) {
-                $("#cm").html(data);
+                var stat = data;
+                if(data * 1 < 10)
+                {
+                    stat = "0"+data;
+                }
+                $("#cm").html(stat);
             }
         })
     }
@@ -315,12 +325,17 @@ $(document).ready(function () {
             method: "POST",
             data: {statClient: 1},
             success: function (data) {
-                $("#cl").html(data);
+                var stat = data;
+                if(data * 1 < 10)
+                {
+                    stat = "0"+data;
+                }
+                $("#cl").html(stat);
             }
         })
     }
-    
-        //Fetch sales
+
+    //Fetch sales
     fetch_Sales_Stat();
     function fetch_Sales_Stat() {
         $.ajax({
@@ -329,6 +344,34 @@ $(document).ready(function () {
             data: {statSales: 1},
             success: function (data) {
                 $("#sl").html(data);
+            }
+        })
+    }
+    
+    //Commandes Count
+    /*CommandesCount();
+    function CommandesCount() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {commandeCount: 1},
+            success: function (data) {
+                //alert(data);
+            }
+        })
+    }*/
+    
+    //Commandes Count
+    CommandesCheck();
+    function CommandesCheck() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {checkCommande: 1},
+            success: function (data) {
+                if(data == 1){
+                    alert("Une commande a été ajoutée maintenant");
+                }
             }
         })
     }

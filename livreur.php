@@ -155,6 +155,20 @@ if (!isset($_SESSION["userid"])) {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-2"></div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-md-8"></div>
+                                    <div class="col-md-4">
+                                        <label align="right">Rechercher :</label>
+                                        <input type="text" id="search" class="form-control" placeholder="rechercher dans n'importe quel ordre">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-2"></div>
                             <div class="col-sm-8 text-center">
                                 <div class="form-group">
                                     <span class="form-control">Liste Des Livreurs</span>
@@ -167,7 +181,7 @@ if (!isset($_SESSION["userid"])) {
                             <div class="col-md-8">
                                 <div class="card">
                                     <div class=" table table-responsive-md">
-                                        <table class="table table-hover thead-dark" border="0">
+                                        <table class="table table-hover thead-dark table_search" border="0">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th class="text-center">Nom Complet</th>                                            

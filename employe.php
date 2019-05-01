@@ -136,7 +136,7 @@ if (!isset($_SESSION["userid"])) {
                     </div>
                 </nav>
                 <div class="content" >
-                    <div class="container-fluid" >
+                    <div class="container" >
                         <div class="row text-center">
                             <h1 class="titles">Espace de Employes</h1><br>
                         </div>
@@ -226,6 +226,14 @@ if (!isset($_SESSION["userid"])) {
                     </div>
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-md-8"></div>
+                            <div class="col-md-4">
+                                <label align="right">Rechercher :</label>
+                                <input type="text" id="search" class="form-control" placeholder="rechercher dans n'importe quel ordre">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
                             <div class="col-sm-12 text-center">
                                 <div class="form-group">
                                     <span class="form-control">Liste Des Employés</span>
@@ -236,7 +244,7 @@ if (!isset($_SESSION["userid"])) {
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class=" table table-responsive-md">
-                                        <table class="table table-hover thead-dark" border="0">
+                                        <table class="table table-hover thead-dark table_search" border="0">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th>Nom</th>                                            

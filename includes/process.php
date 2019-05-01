@@ -4,7 +4,11 @@ include_once("user.php");
 include_once("manage.php");
 include_once("DBOperation.php");
 
-
+if(isset($_SESSION["CommandeCount"])){
+    $commandeCount = $_SESSION["CommandeCount"];
+}else {
+    $commandeCount = "notyet";
+}
 
 //$email = $_SESSION["email"];
 //For Login 
@@ -86,7 +90,7 @@ if (isset($_POST["manageCommande"])) {
             $id = null;
             $id = $row["fourid"];
             if ($id != null) {
-                $check = $m->checkfourpresence("livreur",$id);
+                $check = $m->checkfourpresence("livreur", $id);
             }
             if ($check == 0) {
                 $m->update_record("livreur", ["id" => $id], ["etat" => "Disponible"]);
@@ -95,7 +99,7 @@ if (isset($_POST["manageCommande"])) {
             }
             $id = $row["idvehi"];
             if ($id != null) {
-                $check = $m->checkfourpresence("vehicule",$id);
+                $check = $m->checkfourpresence("vehicule", $id);
             }
             if ($check == 0) {
                 $m->update_record("vehicule", ["id" => $id], ["etat" => "Disponible"]);
@@ -109,33 +113,33 @@ if (isset($_POST["manageCommande"])) {
                 <td><?php echo $row["dateCommande"]; ?></td>
                 <td><?php echo $row["Livreur"]; ?></td>
                 <td><?php echo $row["numeroVehicule"]; ?></td>
-            <?php
-            if ($row["etatLivraison"] === "Pas Encore") {
-                ?>
+                <?php
+                if ($row["etatLivraison"] === "Pas Encore") {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-warning" role="alert"><?php echo $row["etatLivraison"]; ?></span>
                         </div>
                     </td>
-                <?php
-            } else if ($row["etatLivraison"] === "Sous Livraison") {
-                ?>
+                    <?php
+                } else if ($row["etatLivraison"] === "Sous Livraison") {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-info" role="alert"><?php echo $row["etatLivraison"]; ?></span>
                         </div>
                     </td>
-                <?php
-            } else {
-                ?>
+                    <?php
+                } else {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-success" role="alert"><?php echo $row["etatLivraison"]; ?></span>
                         </div>
                     </td>
-                <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
                 <td class="text-center">
                     <a data-toggle="modal" data-target="#update_commande" eid="<?php echo $row['id']; ?>" class="btn btn-primary btn-sm edit_commande">Modifier</a>
                     <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_commande">Supprimer</a>
@@ -210,26 +214,25 @@ if (isset($_POST["manageVehicule"])) {
             ?>
             <tr class="text-center">
                 <td><?php echo $row["numeroVehicule"]; ?></td>
-                <td><?php echo $row["etat"]; ?></td>
-            <?php
-            if ($row["etat"] === "Disponible") {
-                ?>
+                <?php
+                if ($row["etat"] === "Disponible") {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-success" role="alert"><?php echo $row["etat"]; ?></span>
                         </div>
                     </td>
-                <?php
-            } else {
-                ?>
+                    <?php
+                } else {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-danger" role="alert"><?php echo $row["etat"]; ?></span>
                         </div>
                     </td>
-                <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
                 <td class="text-center">
                     <a data-toggle="modal" data-target="#update_vehicule" eid="<?php echo $row['id']; ?>" class="btn btn-primary btn-sm edit_vehicule">Modifier</a>
                     <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_vehicule">Supprimer</a>
@@ -319,25 +322,25 @@ if (isset($_POST["manageLivreur"])) {
                 <td><?php echo $row["cin"]; ?></td>
                 <td><?php echo $row["adresse"]; ?></td>
                 <td><?php echo $row["telephone"]; ?></td>
-            <?php
-            if ($row["etat"] === "Disponible") {
-                ?>
+                <?php
+                if ($row["etat"] === "Disponible") {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-success" role="alert"><?php echo $row["etat"]; ?></span>
                         </div>
                     </td>
-                <?php
-            } else {
-                ?>
+                    <?php
+                } else {
+                    ?>
                     <td>
                         <div >
                             <span class="alert alert-danger" role="alert"><?php echo $row["etat"]; ?></span>
                         </div>
                     </td>
-                <?php
-            }
-            ?>
+                    <?php
+                }
+                ?>
                 <td class="text-center">
                     <a data-toggle="modal" data-target="#update_livreur" eid="<?php echo $row['id']; ?>" class="btn btn-primary btn-sm edit_livreur">Modifier</a>
                     <a href="#" did="<?php echo $row['id']; ?>" class="btn btn-danger btn-sm del_livreur">Supprimer</a>
@@ -412,6 +415,22 @@ if (isset($_POST["statSales"])) {
     $row = $obj->getAllStat("ligne_commande");
 
     echo $row["Stat"];
+
+    exit();
+}
+//Commande Count
+/*if (isset($_POST["commandeCount"])) {
+
+    echo $commandeCount;
+
+    exit();
+}*/
+//Check Coummande
+if (isset($_POST["checkCommande"])) {
+    $obj = new DBOperation();
+    $result = $obj->checkCommandePlus();
+
+    echo $result;
 
     exit();
 }
