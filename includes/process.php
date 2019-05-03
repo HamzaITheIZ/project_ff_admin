@@ -4,9 +4,9 @@ include_once("user.php");
 include_once("manage.php");
 include_once("DBOperation.php");
 
-if(isset($_SESSION["CommandeCount"])){
+if (isset($_SESSION["CommandeCount"])) {
     $commandeCount = $_SESSION["CommandeCount"];
-}else {
+} else {
     $commandeCount = "notyet";
 }
 
@@ -18,11 +18,25 @@ if (isset($_POST["log_email"]) AND isset($_POST["log_password"])) {
     echo $result;
     exit();
 }
-
+//For Edit Profile
+if (isset($_POST["passwordnew"]) AND isset($_POST["passwordf"])) {
+    $user = new User();
+    $result = $user->profilEdit($_POST["usernamen"], $_POST["passwordf"], $_POST["passwordnew"], $_POST["pemail"]);
+    echo $result;
+    exit();
+}
+//For Edit Name Only
+if (isset($_POST["editName"])) {
+    $user = new User();
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $result = $user->editProfilName($name, $email);
+    echo $result;
+}
 //For Employe Creation
 if (isset($_POST["employe_nom"]) AND isset($_POST["employe_email"])) {
     $user = new User();
-    $result = $user->addemployes($_POST["employe_nom"] . " " . $_POST["employe_prenom"], $_POST["employe_cin"], $_POST["employe_email"], $_POST["employe_password"], $_POST["employe_adresse"], $_POST["employe_tele"]);
+    $result = $user->addemployes($_POST["employe_nom"] . " " . $_POST["employe_prenom"], $_POST["employe_cin"], $_POST["employe_email"], $_POST["employe_password"], $_POST["employe_adresse"], $_POST["employe_tele"], $_POST["role"]);
     echo $result;
     exit();
 }
@@ -74,8 +88,9 @@ if (isset($_POST["modal_enom"])) {
     $cin = $_POST["modal_ecin"];
     $adresse = $_POST["modal_eadresse"];
     $tele = $_POST["modal_etele"];
+    $role = $_POST["urole"];
 
-    $result = $m->update_record("employe", ["id" => $id], ["nom" => $nom, "cin" => $cin, "adresse" => $adresse, "telephone" => $tele]);
+    $result = $m->update_record("employe", ["id" => $id], ["nom" => $nom, "cin" => $cin, "adresse" => $adresse, "telephone" => $tele, "role" => $role]);
     echo $result;
 }
 
@@ -110,6 +125,7 @@ if (isset($_POST["manageCommande"])) {
             <tr class="text-center">
                 <td><?php echo $row["nom"]; ?></td>
                 <td><?php echo $row["cin"]; ?></td>
+                <td><?php echo $row["Responsable"]; ?></td>
                 <td><?php echo $row["dateCommande"]; ?></td>
                 <td><?php echo $row["Livreur"]; ?></td>
                 <td><?php echo $row["numeroVehicule"]; ?></td>
@@ -168,12 +184,40 @@ if (isset($_POST["updateCommande"])) {
 //Update Commande
 if (isset($_POST["select_etat"])) {
     $m = new Manage();
+    $dbo = new DBOperation();
     $id = $_POST["id"];
     $nomliv = $_POST["select_liv"];
     $nv = $_POST["select_veh"];
     $etat = $_POST["select_etat"];
+    $employe = $_POST["employe"];
 
-    $result = $m->update_record("commande", ["id" => $id], ["livreurCommande" => $nomliv, "vehiculeUtiliser" => $nv, "etatLivraison" => $etat]);
+    $result = $m->update_record("commande", ["id" => $id], ["livreurCommande" => $nomliv, "vehiculeUtiliser" => $nv, "etatLivraison" => $etat, "responsable" => $employe]);
+
+    if ($result == "UPDATED") {
+        $dbo->addLivraison($id, $nomliv, $nv);
+    }
+
+    echo $result;
+}
+//Update Etat Only
+if (isset($_POST["UpdateEtat"])) {
+    $m = new Manage();
+    $id = $_POST["cid"];
+    $etat = $_POST["etat"];
+    $result = $m->update_record("commande", ["id" => $id], ["etatLivraison" => $etat]);
+    echo $result;
+}
+//Update Livraison Infos
+if (isset($_POST["UpdateLivraison"])) {
+    $m = new Manage();
+    $id = $_POST["cid"];
+    $livreur = $_POST["livreur"];
+    $vehicule = $_POST["vehicule"];
+    $result = $m->update_record("livraison", ["commande" => $id], ["livreur" => $livreur, "vehicule" => $vehicule]);
+
+    if ($result == "UPDATED") {
+        $result = $m->update_record("commande", ["id" => $id], ["livreurCommande" => $livreur, "vehiculeUtiliser" => $vehicule]);
+    }
     echo $result;
 }
 
@@ -381,6 +425,55 @@ if (isset($_POST["etat_livreur"])) {
     echo $result;
 }
 
+//Fill Livraison
+if (isset($_POST["fillLivraison"])) {
+    $m = new Manage();
+    $result = $m->fillAnyRecord("livraison");
+    $rows = $result["rows"];
+    if (count($rows) > 0) {
+        $n = 1;
+        foreach ($rows as $row) {
+            ?>
+            <tr class="text-center">
+                <td><?php echo $n;?></td>
+                <td>N°<?php echo $row["id"]; ?></td>
+                <td><?php echo $row["nom"]; ?></td>
+                <td><?php echo $row["numeroVehicule"]; ?></td>
+                <td><?php echo $row["dateLivraison"]; ?></td>
+                <?php
+                if ($row["etatLivraison"] === "Pas Encore") {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-warning" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                } else if ($row["etatLivraison"] === "Sous Livraison") {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-info" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                } else {
+                    ?>
+                    <td>
+                        <div >
+                            <span class="alert alert-success" role="alert"><?php echo $row["etatLivraison"]; ?></span>
+                        </div>
+                    </td>
+                    <?php
+                }
+                ?>
+            </tr>
+            <?php
+            $n++;
+        }
+        exit();
+    }
+}
 //----------------Stat------------------
 //Plat Stat
 if (isset($_POST["statPlat"])) {
@@ -400,7 +493,7 @@ if (isset($_POST["statCommande"])) {
 
     exit();
 }
-//Commande Stat
+//Client Stat
 if (isset($_POST["statClient"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("client");
@@ -409,7 +502,7 @@ if (isset($_POST["statClient"])) {
 
     exit();
 }
-//Commande Stat
+//sold Stat
 if (isset($_POST["statSales"])) {
     $obj = new DBOperation();
     $row = $obj->getAllStat("ligne_commande");
@@ -418,13 +511,33 @@ if (isset($_POST["statSales"])) {
 
     exit();
 }
-//Commande Count
-/*if (isset($_POST["commandeCount"])) {
+//Top Plats
+if (isset($_POST["topPlats"])) {
+    $obj = new DBOperation();
+    $rows = $obj->getAllStat("top");
 
-    echo $commandeCount;
-
+    if (count($rows) > 2) {
+        foreach ($rows as $row) {
+            ?>
+            <div class="skill">
+                <div class="graph" style="height: <?php echo $row["top"];?>%">
+                    <div class="percent"><?php echo $row["top"];?>%</div>
+                </div>
+                <div class="name"><?php echo $row["nom"];?></div>
+            </div>
+            <?php
+        }
+    }
+    
     exit();
-}*/
+}
+//Commande Count
+/* if (isset($_POST["commandeCount"])) {
+
+  echo $commandeCount;
+
+  exit();
+  } */
 //Check Coummande
 if (isset($_POST["checkCommande"])) {
     $obj = new DBOperation();

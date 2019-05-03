@@ -72,13 +72,19 @@ if (!isset($_SESSION["userid"])) {
                                 <p>Statistique</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="employe.php">
-                                <!--<i class="pe-7s-user"></i>        -->                        
-                                <i class="fas fa-user-tie"></i>
-                                <p>LES EMPLOYES</p>
-                            </a>
-                        </li>
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="employe.php">
+                                    <!--<i class="pe-7s-user"></i>        -->                        
+                                    <i class="fas fa-user-tie"></i>
+                                    <p>LES EMPLOYES</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="client.php">
                                 <i class="fas fa-users"></i>
@@ -110,7 +116,18 @@ if (!isset($_SESSION["userid"])) {
                                 <p>commandes</p>
                             </a>
                         </li>
-
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="historique.php">
+                                    <i class="fas fa-history"></i>
+                                    <p>Livraison</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -125,7 +142,7 @@ if (!isset($_SESSION["userid"])) {
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="logout.php">
                                         Log out
                                     </a>
                                 </li>
@@ -166,6 +183,7 @@ if (!isset($_SESSION["userid"])) {
                                                         <tr>                                            
                                                             <th class="text-center">Nom de Client</th>
                                                             <th class="text-center">CIN</th>
+                                                            <th class="text-center">Employé Responsable</th>
                                                             <th class="text-center">Date de Commande</th>
                                                             <th class="text-center">Nom de Livreur</th>
                                                             <th class="text-center">Vehicule Utiliser</th>
@@ -223,7 +241,7 @@ if (!isset($_SESSION["userid"])) {
         </div>
 
         <?php
-        //Profil Form
+        //Update Commande Form
         include_once("./modals/update_commande.php");
         ?>
     </body>

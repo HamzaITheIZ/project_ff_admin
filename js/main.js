@@ -10,6 +10,7 @@ $(document).ready(function () {
         var statuscin = false;
         var statusa = false;
         var statust = false;
+        var statusr = false;
         var prenom = $("#employe_prenom");
         var nom = $("#employe_nom");
         var cin = $("#employe_cin");
@@ -18,6 +19,7 @@ $(document).ready(function () {
         var pass2 = $("#employe_pass2");
         var adresse = $("#employe_adresse");
         var telephone = $("#employe_tele");
+        var role = $("#role");
 
         var email_patt = new RegExp(/^[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
         var tele_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
@@ -85,6 +87,15 @@ $(document).ready(function () {
             $("#a_error").html("");
             statusa = true;
         }
+        if (role.val() == "") {
+            role.addClass("border-danger");
+            $("#r_error").html("<span class='text-danger'>veuillez sélectionner un rôle</span>");
+            statusr = false;
+        } else {
+            role.removeClass("border-danger");
+            $("#r_error").html("");
+            statusr = true;
+        }
         if (!tele_patt.test(telephone.val())) {
             telephone.addClass("border-danger");
             $("#t_error").html("<span class='text-danger'>Veuillez entrer un numero de telephone valide</span>");
@@ -94,27 +105,29 @@ $(document).ready(function () {
             $("#t_error").html("");
             statust = true;
         }
-        if ((pass1.val() == pass2.val()) && status == true && statusp == true && statusn == true && statuscin == true && statuse == true && statusa == true && statust == true)
+        if (status == true && statusp == true && statusn == true && statuscin == true && statuse == true && statusa == true && statusr == true && statust == true)
         {
-            $.ajax({
-                url: DOMAIN + "/includes/process.php",
-                method: "POST",
-                data: $("#employe_form").serialize(),
-                success: function (data) {
-                    if (data == "EMAIL_ALREADY_EXISTS") {
-                        alert("On dirait que ton email est déjà utilisé");
-                    } else if (data == "SOME_ERROR") {
-                        alert("Vérifier vos entrées s'il manque quelque chose");
-                    } else {
-                        alert("Employe Ajouter avec Succes");
-                        window.location.href = "";
+            if (pass1.val() == pass2.val()) {
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: $("#employe_form").serialize(),
+                    success: function (data) {
+                        if (data == "EMAIL_ALREADY_EXISTS") {
+                            alert("On dirait que ton email est déjà utilisé");
+                        } else if (data == "SOME_ERROR") {
+                            alert("Vérifier vos entrées s'il manque quelque chose");
+                        } else {
+                            alert("Employe Ajouter avec Succes");
+                            window.location.href = "";
+                        }
                     }
-                }
-            })
-        } else {
-            pass2.addClass("border-danger");
-            $("#pass2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
-            status = false;
+                })
+            } else {
+                pass2.addClass("border-danger");
+                $("#pass2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
+                status = false;
+            }
         }
 
     })
@@ -280,6 +293,117 @@ $(document).ready(function () {
             })
         }
     })
+    
+    //Edit profile
+    $("#profil_form").on("submit", function () {
+
+        var statusn = false;
+        var status = false;
+        var name = $("#usernamen");
+        var pass1 = $("#passwordf");
+        var passn = $("#passwordnew");
+        var pass2 = $("#passwords");
+        //var e_patt = new RegExp(/^[a-z0-9_-]+(\.[a-z0-9_-]+)*@[a-z0-9_-]+(\.[a-z0-9_-]+)*(\.[a-z]{2,4})$/);
+
+        if (name.val() == "" || name.val().length < 6) {
+            name.addClass("border-danger");
+            $("#pu_error").html("<span class='text-danger'>S'il vous plaît entrer le nom et le nom doit être plus de 6 caractères</span>");
+            statusn = false;
+        } else {
+            name.removeClass("border-danger");
+            $("#pu_error").html("");
+            statusn = true;
+        }
+        if (pass1.val() == "" || pass1.val().length < 9) {
+            pass1.addClass("border-danger");
+            $("#pp1_error").html("<span class='text-danger'>S'il vous plaît entrer plus de 9 chiffres mot de passe</span>");
+            status = false;
+        } else {
+            pass1.removeClass("border-danger");
+            $("#pp1_error").html("");
+            status = true;
+        }
+        if (passn.val() == "" || passn.val().length < 9) {
+            passn.addClass("border-danger");
+            $("#pn_error").html("<span class='text-danger'>S'il vous plaît entrer plus de 9 chiffres mot de passe</span>");
+            status = false;
+        } else {
+            passn.removeClass("border-danger");
+            $("#pn_error").html("");
+            status = true;
+        }
+
+        if (pass2.val() == "" || pass2.val().length < 9) {
+            pass2.addClass("border-danger");
+            $("#pp2_error").html("<span class='text-danger'>Le mot de passe est plus petit que l'autre</span>");
+            status = false;
+        } else {
+            pass2.removeClass("border-danger");
+            $("#pp2_error").html("");
+            status = true;
+        }
+        if (status == true && statusn == true) {
+            if (passn.val() == pass2.val()) {
+                $(".overlay").show();
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: $("#profil_form").serialize(),
+                    success: function (data) {
+                        if (data == "EMAIL_NOT_MATCHED") {
+                            $(".overlay").hide();
+                            alert("L'Email donner est Inccorect!");
+                        } else if (data == "PASSWORD_NOT_EXISTS") {
+                            $(".overlay").hide();
+                            alert("L'ancien mot de passe est invalide");
+                        } else {
+                            //alert(data);
+                            $(".overlay").hide();
+                            alert("Votre Profil est Bien Modifier!")
+                            $('#form_profil').modal('toggle');
+                        }
+                    }
+                })
+            } else {
+                pass2.addClass("border-danger");
+                $("#pp2_error").html("<span class='text-danger'>Le mot de passe n'est pas similaire à l'autre</span>");
+                status = true;
+            }
+        } else
+            alert("Il ya des errors dans votre entries!");
+    })
+
+    //Modifer Name
+    $("body").delegate(".edit_name", "click", function () {
+
+        var statusn = false;
+        var name = $("#usernamen");
+        if (name.val() == "" || name.val().length < 6) {
+            name.addClass("border-danger");
+            $("#pu_error").html("<span class='text-danger'>S'il vous plaît entrer le nom et le nom doit être plus de 6 caractères</span>");
+            statusn = false;
+        } else {
+            name.removeClass("border-danger");
+            $("#pu_error").html("");
+            statusn = true;
+        }
+        var username = name.val();
+        if (statusn == true) {
+            $.ajax({
+                url: DOMAIN + "/includes/process.php",
+                method: "POST",
+                data: {editName: 1, name: username, email: $("#pemail").val()},
+                success: function (data) {
+                    if (data == 1) {
+                        alert("Votre Nom est bien Modifier!");
+                        window.location.href = "";
+                    } else {
+                        alert(data);
+                    }
+                }
+            })
+        }
+    })
 
     //Fetch Plat Stat
     fetch_Plat_Stat();
@@ -290,9 +414,9 @@ $(document).ready(function () {
             data: {statPlat: 1},
             success: function (data) {
                 var stat = data;
-                if(data * 1 < 10)
+                if (data * 1 < 10)
                 {
-                    stat = "0"+data;
+                    stat = "0" + data;
                 }
                 $("#pl").html(stat);
             }
@@ -308,9 +432,9 @@ $(document).ready(function () {
             data: {statCommande: 1},
             success: function (data) {
                 var stat = data;
-                if(data * 1 < 10)
+                if (data * 1 < 10)
                 {
-                    stat = "0"+data;
+                    stat = "0" + data;
                 }
                 $("#cm").html(stat);
             }
@@ -326,9 +450,9 @@ $(document).ready(function () {
             data: {statClient: 1},
             success: function (data) {
                 var stat = data;
-                if(data * 1 < 10)
+                if (data * 1 < 10)
                 {
-                    stat = "0"+data;
+                    stat = "0" + data;
                 }
                 $("#cl").html(stat);
             }
@@ -347,20 +471,32 @@ $(document).ready(function () {
             }
         })
     }
-    
-    //Commandes Count
-    /*CommandesCount();
-    function CommandesCount() {
+    //Fetch top 3 meal
+    fetch_Top();
+    function fetch_Top() {
         $.ajax({
             url: DOMAIN + "/includes/process.php",
             method: "POST",
-            data: {commandeCount: 1},
+            data: {topPlats: 1},
             success: function (data) {
-                //alert(data);
+                $("#tp").html(data);
             }
         })
-    }*/
-    
+    }
+
+    //Commandes Count
+    /*CommandesCount();
+     function CommandesCount() {
+     $.ajax({
+     url: DOMAIN + "/includes/process.php",
+     method: "POST",
+     data: {commandeCount: 1},
+     success: function (data) {
+     //alert(data);
+     }
+     })
+     }*/
+
     //Commandes Count
     CommandesCheck();
     function CommandesCheck() {
@@ -369,7 +505,7 @@ $(document).ready(function () {
             method: "POST",
             data: {checkCommande: 1},
             success: function (data) {
-                if(data == 1){
+                if (data == 1) {
                     alert("Une commande a été ajoutée maintenant");
                 }
             }

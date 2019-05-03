@@ -112,7 +112,18 @@ if (!isset($_SESSION["userid"])) {
                                 <p>commandes</p>
                             </a>
                         </li>
-
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="historique.php">
+                                    <i class="fas fa-history"></i>
+                                    <p>Livraison</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -127,7 +138,7 @@ if (!isset($_SESSION["userid"])) {
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="logout.php">
                                         Log out
                                     </a>
                                 </li>
@@ -199,6 +210,15 @@ if (!isset($_SESSION["userid"])) {
                                                     <label>Adresse : </label>
                                                     <input type="text" class="form-control" id="employe_adresse" name="employe_adresse">
                                                     <small id="a_error" class="form-text text-muted"></small>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Role : </label>
+                                                    <select class="form-control" id="role" name="role">
+                                                        <option value="">Choisissez un Rôle</option>
+                                                        <option value="Admin">Admin</option>
+                                                        <option value="Employe">Employe</option>
+                                                    </select>
+                                                    <small id="r_error" class="form-text text-muted"></small>
                                                 </div>
                                             </div>
                                             <div class="row">

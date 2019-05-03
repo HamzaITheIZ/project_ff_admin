@@ -206,13 +206,19 @@ function checkInput($data) {
                                 <p>Statistique</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="employe.php">
-                                <!--<i class="pe-7s-user"></i>        -->                        
-                                <i class="fas fa-user-tie"></i>
-                                <p>LES EMPLOYES</p>
-                            </a>
-                        </li>
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="employe.php">
+                                    <!--<i class="pe-7s-user"></i>        -->                        
+                                    <i class="fas fa-user-tie"></i>
+                                    <p>LES EMPLOYES</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="client.php">
                                 <i class="fas fa-users"></i>
@@ -244,7 +250,18 @@ function checkInput($data) {
                                 <p>commandes</p>
                             </a>
                         </li>
-
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="historique.php">
+                                    <i class="fas fa-history"></i>
+                                    <p>Livraison</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -259,7 +276,7 @@ function checkInput($data) {
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="logout.php">
                                         Log out
                                     </a>
                                 </li>

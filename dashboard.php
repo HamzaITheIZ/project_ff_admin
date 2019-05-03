@@ -47,6 +47,7 @@ if (!isset($_SESSION["userid"])) {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="./css/titles.css">
+        <link rel="stylesheet" type="text/css" href="./css/chart.css">
         <script type="text/javascript" src="./js/main.js"></script>
 
     </head>
@@ -74,13 +75,19 @@ if (!isset($_SESSION["userid"])) {
                                 <p>Statistique</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="employe.php">
-                                <!--<i class="pe-7s-user"></i>        -->                        
-                                <i class="fas fa-user-tie"></i>
-                                <p>LES EMPLOYES</p>
-                            </a>
-                        </li>
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="employe.php">
+                                    <!--<i class="pe-7s-user"></i>        -->                        
+                                    <i class="fas fa-user-tie"></i>
+                                    <p>LES EMPLOYES</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li>
                             <a href="client.php">
                                 <i class="fas fa-users"></i>
@@ -91,6 +98,12 @@ if (!isset($_SESSION["userid"])) {
                             <a href="plat.php">
                                 <i class="fas fa-hamburger"></i>
                                 <p>Les plats</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="livreur.php">
+                                <i class="fas fa-running"></i>
+                                <p>Les Livreurs</p>
                             </a>
                         </li>
                         <li>
@@ -106,7 +119,18 @@ if (!isset($_SESSION["userid"])) {
                                 <p>commandes</p>
                             </a>
                         </li>
-
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="historique.php">
+                                    <i class="fas fa-history"></i>
+                                    <p>Livraison</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -114,15 +138,18 @@ if (!isset($_SESSION["userid"])) {
             <div class="main-panel" >
                 <nav class="navbar navbar-default navbar-fixed">
                     <div class="container-fluid">
-
                         <div class="collapse navbar-collapse">
-
-
                             <ul class="nav navbar-nav navbar-right">
-
                                 <li>
-                                    <a href="logout.php">
+                                    <a href="logout.php" title="Se déconnecter">
                                         Log out
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#form_profil" title="Cliquez pour éditer votre profil">
+                                        <?php echo $_SESSION["username"]; ?>
                                     </a>
                                 </li>
                             </ul>
@@ -179,12 +206,30 @@ if (!isset($_SESSION["userid"])) {
                             <h1 class="beautifulT">Nombre totale des plats vendé: <b id="sl"></b></h1>
                         </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h1 class="statminitext">Trois Plats les plus vendu</h1>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="box" id="tp">
+
+                            </div>
+                        </div>
+                        <div class="col-lg-2"></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
 
         </div>
-
-
+        <?php
+        //Profil Form
+        include_once("./modals/editProfil.php");
+        ?>
     </body>
     <style>
         .list{

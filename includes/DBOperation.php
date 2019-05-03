@@ -60,11 +60,27 @@ class DBOperation {
         }
     }
 
+    //Livraison treatement
+    public function addLivraison($commande, $livreur, $vehicule) {
+        $pre_stmt = $this->con->prepare("INSERT INTO `livraison`(`commande`, `livreur` ,`vehicule`,`dateLivraison`)
+		 VALUES (?,?,?,?)");
+        $date = date("d/m/Y H:i");
+        $pre_stmt->bind_param("ssss", $commande, $livreur, $vehicule, $date);
+        $result = $pre_stmt->execute() or die($this->con->error);
+        if ($result) {
+            return "LIVRAISON_ADDED";
+        } else {
+            return 0;
+        }
+    }
+
     //For Stat
     public function getAllStat($table) {
-
-        $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
-
+        if ($table == "top") {
+            $sql = "SELECT P.nom,TRUNCATE(((count(L.nomPlat)*100) / (SELECT COUNT(*) from ligne_commande)),0) AS 'top'  from plat P INNER JOIN ligne_commande L on P.nom=L.nomPlat GROUP by P.nom ORDER by top DESC LIMIT 3";
+        } else {
+            $sql = "SELECT Count(*) as 'Stat' FROM " . $table;
+        }
         $pre_stmt = $this->con->prepare($sql);
         $pre_stmt->execute() or die($this->con->error);
         $result = $pre_stmt->get_result();
@@ -92,10 +108,10 @@ class DBOperation {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();
         }
-        if($row["Count"] > $_SESSION["CommandeCount"]){
+        if ($row["Count"] > $_SESSION["CommandeCount"]) {
             $_SESSION["CommandeCount"] = $row["Count"];
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }

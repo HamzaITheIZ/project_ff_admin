@@ -31,6 +31,15 @@
                         <input type="text" class="form-control" id="modal_etele" name="modal_etele">
                         <small id="mt_error" class="form-text text-muted"></small>
                     </div>
+                    <div class="form-group">
+                        <label>Role : </label>
+                        <select class="form-control" id="urole" name="urole">
+                            <option value="">Choisissez un Rôle</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Employe">Employe</option>
+                        </select>
+                        <small id="ur_error" class="form-text text-muted"></small>
+                    </div>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </form>
             </div>

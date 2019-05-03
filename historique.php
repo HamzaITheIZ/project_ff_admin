@@ -12,15 +12,15 @@ if (!isset($_SESSION["userid"])) {
         <!--<link rel="icon" type="image/png" href="assets/img/favicon.ico">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <title>VEHICULES</title>
+        <title>Livraison</title>
 
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="viewport" content="width=device-width" />
 
 
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-
         <!-- Bootstrap core CSS     -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -43,9 +43,8 @@ if (!isset($_SESSION["userid"])) {
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-        <script type="text/javascript" src="./js/main.js"></script>
         <script type="text/javascript" src="./js/manage.js"></script>
-        <link rel="stylesheet" href="./css/titles.css">
+        <link rel="stylesheet" type="text/css" href="./css/titles.css">
 
     </head>
     <body>
@@ -103,7 +102,7 @@ if (!isset($_SESSION["userid"])) {
                                 <p>Les Livreurs</p>
                             </a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="vehicule.php">
                                 <i class="fas fa-shuttle-van"></i>
                                 <p>Les Vehicules</p>
@@ -119,7 +118,7 @@ if (!isset($_SESSION["userid"])) {
                         <?php
                         if ($_SESSION["role"] == "Admin") {
                             ?>
-                            <li>
+                            <li class="active">
                                 <a href="historique.php">
                                     <i class="fas fa-history"></i>
                                     <p>Livraison</p>
@@ -128,6 +127,7 @@ if (!isset($_SESSION["userid"])) {
                             <?php
                         }
                         ?>
+
                     </ul>
                 </div>
             </div>
@@ -151,86 +151,52 @@ if (!isset($_SESSION["userid"])) {
                     </div>
                 </nav>
 
-                <div class="content" >
+                <div class="content">
                     <div class="container-fluid" >
-                        <div class="row">
-                            <div class="col-lg-12">
+                        <div class="content" >
+                            <div class="container-fluid">
                                 <div class="row text-center">
-                                    <h1 class="titles">Gestion de Vehicule</h1><br>
+                                    <h1 class="titles">Historique de Livraison</h1><br>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row text-center">                     
-                                    <button href="#" data-toggle="modal" data-target="#ajouter_vehicule" class="btn btn-primary " style="width: 200px;height: 50px; text-align: center;">Ajouter Vehicule</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-8">
                                 <div class="row">
-                                    <div class="col-md-8"></div>
-                                    <div class="col-md-4">
-                                        <label align="right">Rechercher :</label>
-                                        <input type="text" id="search" class="form-control" placeholder="rechercher dans n'importe quel ordre">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="form-group">
+                                            <span class="form-control">Les livraison</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-2"></div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-2"></div>
-                            <div class="col-sm-8 text-center">
-                                <div class="form-group">
-                                    <span class="form-control">Liste Des Employés</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-2"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class=" table table-responsive-md">
-                                        <table class="table table-hover thead-dark table_search" border="0">
-                                            <thead class="thead-dark">
-                                                <tr>
-                                                    <th class="text-center">Numero de Vehicule</th>                                            
-                                                    <th class="text-center">Etat de Vehicule</th>
-                                                    <th class="text-center">Operations</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="get_vehicule">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="table table-responsive-md">
+                                                <table class="table table-hover thead-dark" border="0">
+                                                    <thead class="thead-dark">
+                                                        <tr>                                            
+                                                            <th class="text-center">Numero</th>                                            
+                                                            <th class="text-center">Commande</th>
+                                                            <th class="text-center">Livreur</th>
+                                                            <th class="text-center">Vehicule</th>
+                                                            <th class="text-center">Date Livraison</th>
+                                                            <th class="text-center">Etat Livraison</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody  id="livraison">
 
-                                            </tbody>
-                                        </table>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> 
                                     </div>
-                                </div> 
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
+                                </div>
 
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
-
-
-
         </div>
 
-        <?php
-        //Profil Form
-        include_once("./modals/ajouter_vehicule.php");
-        include_once("./modals/update_vehicule.php");
-        ?>
+
     </body>
 
     <!--   Core JS Files   -->

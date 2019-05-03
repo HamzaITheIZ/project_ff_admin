@@ -13,7 +13,9 @@ class Manage {
     // method updated by your needs
     public function fillAnyRecord($table) {
         if ($table == "commande") {
-            $sql = "SELECT C.id,Cl.nom,Cl.cin,C.dateCommande,L.id AS 'fourid',L.nom AS 'Livreur',V.id AS 'idvehi',V.numeroVehicule,C.etatLivraison from commande C INNER JOIN client Cl ON C.clientCommande=Cl.id LEFT JOIN vehicule V ON C.vehiculeUtiliser = V.id LEFT JOIN livreur L on C.livreurCommande = L.id ";
+            $sql = "SELECT C.id,Cl.nom,Cl.cin,E.nom AS 'Responsable',C.dateCommande,L.id AS 'fourid',L.nom AS 'Livreur',V.id AS 'idvehi',V.numeroVehicule,C.etatLivraison from commande C INNER JOIN client Cl ON C.clientCommande=Cl.id LEFT JOIN vehicule V ON C.vehiculeUtiliser = V.id LEFT JOIN livreur L on C.livreurCommande = L.id LEFT JOIN employe E on C.responsable = E.id";
+        }else if($table == "livraison"){
+            $sql = "SELECT C.id,L.nom,V.numeroVehicule,Lv.dateLivraison,C.etatLivraison FROM livraison Lv INNER JOIN commande C on Lv.commande = C.id INNER JOIN livreur L on Lv.livreur = L.id INNER JOIN vehicule V on Lv.vehicule = V.id ";
         } else {
             $sql = "SELECT * FROM " . $table . " ";
         }

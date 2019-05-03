@@ -71,23 +71,19 @@ if (!isset($_SESSION["userid"])) {
                                 <p>Statistique</p>
                             </a>
                         </li>
-                        <li>
-                            <a href="employe.php">                      
-                                <i class="fas fa-user-tie"></i>
-                                <p>
-                                    LES EMPLOYES
-                                    <!--<b class="caret"></b>-->
-                                </p>
-                            </a>
-                            <!--<ul class="nav collapse" style="height: 0px;">
-                                <li>
-                                    <a class="nav-link" aria-current="false" href="employe.php">
-                                        <span class="sidebar-mini">E</span>
-                                        <span class="sidebar-normal">Employes</span>
-                                    </a>
-                                </li>
-                            </ul>-->
-                        </li>
+                        <?php
+                        if ($_SESSION["role"] == "Admin") {
+                            ?>
+                            <li>
+                                <a href="employe.php">
+                                    <!--<i class="pe-7s-user"></i>        -->                        
+                                    <i class="fas fa-user-tie"></i>
+                                    <p>LES EMPLOYES</p>
+                                </a>
+                            </li>
+                            <?php
+                        }
+                        ?>
                         <li class="active">
                             <a href="client.php">
                                 <i class="fas fa-users"></i>
@@ -134,7 +130,7 @@ if (!isset($_SESSION["userid"])) {
                             <ul class="nav navbar-nav navbar-right">
 
                                 <li>
-                                    <a href="#">
+                                    <a href="logout.php">
                                         Log out
                                     </a>
                                 </li>

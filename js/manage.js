@@ -51,9 +51,7 @@ $(document).ready(function () {
                 $("#modal_ecin").val(data["cin"]);
                 $("#modal_eadresse").val(data["adresse"]);
                 $("#modal_etele").val(data["telephone"]);
-
-
-
+                $("#urole").val(data["role"]);
             }
         })
     })
@@ -64,11 +62,13 @@ $(document).ready(function () {
         var statuscin = false;
         var statusa = false;
         var statust = false;
+        var statusr = false;
 
         var nom = $("#modal_enom");
         var cin = $("#modal_ecin");
         var adresse = $("#modal_eadresse");
         var tele = $("#modal_etele");
+        var role = $("#urole");
 
         var tele_patt = new RegExp(/^[0]{1}[5,6,7]{1}[0-9]{8}$/);
 
@@ -108,8 +108,17 @@ $(document).ready(function () {
             $("#mt_error").html("");
             statust = true;
         }
+        if (role.val() == "") {
+            role.addClass("border-danger");
+            $("#ur_error").html("<span class='text-danger'>veuillez sélectionner un rôle</span>");
+            statusr = false;
+        } else {
+            role.removeClass("border-danger");
+            $("#ur_error").html("");
+            statusr = true;
+        }
 
-        if (statusn == true && statuscin == true && statusa == true && statust == true)
+        if (statusn == true && statuscin == true && statusa == true && statust == true && statusr == true)
         {
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
@@ -162,6 +171,15 @@ $(document).ready(function () {
             })
         }
     })
+    //Show Update Imformations 
+    $("body").delegate(".showup", "click", function () {
+        $("#select_liv").attr("disabled", false);
+        $("#select_veh").attr("disabled", false);
+        $("#select_etat").attr("disabled", true);
+        $("#updateinfo").css("display", "none");
+        $("#mje").css("display", "none");
+        $("#md").css("display", "block");
+    })
 
     //Fill for update Commande
     $("body").delegate(".edit_commande", "click", function () {
@@ -173,6 +191,31 @@ $(document).ready(function () {
             data: {updateCommande: 1, id: eid},
             success: function (data) {
                 console.log(data);
+                //alert(data["etatLivraison"]);
+                if (data["etatLivraison"] == "Livré") {
+                    $("#select_liv").attr("disabled", true);
+                    $("#select_veh").attr("disabled", true);
+                    $("#select_etat").attr("disabled", true);
+                    $("#updateinfo").css("display", "none");
+                    $("#md").css("display", "none");
+                    $("#mj").css("display", "none");
+                } else if (data["livreurCommande"] != null) {
+                    $("#select_liv").attr("disabled", true);
+                    $("#select_veh").attr("disabled", true);
+                    $("#select_etat").attr("disabled", false);
+                    $("#updateinfo").css("display", "block");
+                    $("#md").css("display", "none");
+                    $("#mj").css("display", "none");
+                    $("#mje").css("display", "block");
+                } else {
+                    $("#select_liv").attr("disabled", false);
+                    $("#select_veh").attr("disabled", false);
+                    $("#select_etat").attr("disabled", false);
+                    $("#updateinfo").css("display", "none");
+                    $("#md").css("display", "none");
+                    $("#mj").css("display", "block");
+                    $("#mje").css("display", "none");
+                }
                 $("#id").val(data["id"]);
                 $("#select_liv").val(data["livreurCommande"]);
                 $("#select_veh").val(data["vehiculeUtiliser"]);
@@ -186,10 +229,13 @@ $(document).ready(function () {
         var statusl = false;
         var statusv = false;
 
+        var cid = $("#id");
         var livreur = $("#select_liv");
         var vehicule = $("#select_veh");
         var etat = $("#select_etat");
-
+        var btn1 = $("#mj");
+        var btn2 = $("#mje");
+        var btn3 = $("#md");
 
         if (livreur.val() == "") {
             livreur.addClass("border-danger");
@@ -210,15 +256,33 @@ $(document).ready(function () {
             statusv = true;
         }
 
-        if (statusl == true && statusv == true)
-        {
+        if (btn1.css("display") == "block") {
+            if (statusl == true && statusv == true)
+            {
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: $("#update_commande_form").serialize(),
+                    success: function (data) {
+                        if (data == "UPDATED") {
+                            alert("La Commande est modifier avec succès.!");
+                            window.location.href = "";
+                        } else {
+                            alert(data);
+                        }
+                    }
+                })
+            } else {
+                alert("Votre entries est invalide!");
+            }
+        } else if (btn2.css("display") == "block") {
             $.ajax({
                 url: DOMAIN + "/includes/process.php",
                 method: "POST",
-                data: $("#update_commande_form").serialize(),
+                data: {UpdateEtat: 1, etat: etat.val(), cid: cid.val()},
                 success: function (data) {
                     if (data == "UPDATED") {
-                        alert("La Commande est modifier avec succès.!");
+                        alert("L'Etat est bien modifier.!");
                         window.location.href = "";
                     } else {
                         alert(data);
@@ -226,7 +290,23 @@ $(document).ready(function () {
                 }
             })
         } else {
-            alert("Votre entries est invalide!");
+            if (statusl == true && statusv == true) {
+                $.ajax({
+                    url: DOMAIN + "/includes/process.php",
+                    method: "POST",
+                    data: {UpdateLivraison: 1, livreur: livreur.val(), vehicule: vehicule.val(), cid: cid.val()},
+                    success: function (data) {
+                        if (data == "UPDATED") {
+                            alert("Livraison Informations est Modifié avec succès!");
+                            window.location.href = "";
+                        } else {
+                            alert(data);
+                        }
+                    }
+                })
+            } else {
+                alert("Votre entries est invalide!");
+            }
         }
     })
 
@@ -522,6 +602,18 @@ $(document).ready(function () {
             })
         }
     })
+    //Fill Livraison
+    fillLivraison();
+    function fillLivraison() {
+        $.ajax({
+            url: DOMAIN + "/includes/process.php",
+            method: "POST",
+            data: {fillLivraison: 1},
+            success: function (data) {
+                $("#livraison").html(data);
+            }
+        })
+    }
 
     $("#search").keyup(function () {
         search_table($(this).val());
